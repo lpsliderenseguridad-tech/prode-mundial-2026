@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react"
-import { PARTIDOS, FASES } from "./fixture"import {
+import { PARTIDOS, FASES } from "./fixture"
+import {
   upsertJugador, getPronosticos, guardarFase,
   getAllJugadores, getResultados, upsertResultado, recalcularPuntos
 } from "./supabase"
@@ -10,19 +11,19 @@ import RankingEmpresas from "./components/RankingEmpresas"
 import AdminPanel from "./components/AdminPanel"
 
 const ADMIN_PASS = import.meta.env.VITE_ADMIN_PASS || "lps2026"
+const ES_ELIMINATORIA = (fase) => ["r32","r16","r8","semi","3ro","final"].includes(fase)
 
 export default function App() {
   const [jugador, setJugador] = useState(null)
-  const [pronosticos, setPronosticos] = useState({}) // { partidoId: {l,v} }
-  const [resultados, setResultados] = useState({})   // { partidoId: {l,v} }
+  const [pronosticos, setPronosticos] = useState({})
+  const [resultados, setResultados] = useState({})
   const [jugadores, setJugadores] = useState([])
   const [faseActiva, setFaseActiva] = useState("grupos")
-  const [vista, setVista] = useState("pronosticos") // pronosticos | ranking | empresas | admin
+  const [vista, setVista] = useState("pronosticos")
   const [loading, setLoading] = useState(false)
   const [guardando, setGuardando] = useState(false)
   const [isAdmin, setIsAdmin] = useState(false)
 
-  // Cargar resultados y jugadores globales
   const cargarGlobales = useCallback(async () => {
     const [{ data: resList }, { data: jugList }] = await Promise.all([
       getResultados(),
@@ -30,7 +31,7 @@ export default function App() {
     ])
     if (resList) {
       const map = {}
-      resList.forEach(r => { map[r.partido_id] = { l: r.goles_local, v: r.goles_visita } })
+      resList.forEach(r => { map[r.partido_id] = { l: r.goles_local, v: r.goles_visita, supl: r.ganador_supl, pen: r.ganador_pen } })
       setResultados(map)
     }
     if (jugList) setJugadores(jugList)
@@ -38,12 +39,10 @@ export default function App() {
 
   useEffect(() => { cargarGlobales() }, [cargarGlobales])
 
-  // Login
   const handleLogin = async (nombre, empresa) => {
     setLoading(true)
     const { data, error } = await upsertJugador(nombre, empresa)
     if (error || !data) { alert("Error al registrarse. Intentá de nuevo."); setLoading(false); return }
-
     const { data: pros } = await getPronosticos(data.id)
     const map = {}
     if (pros) pros.forEach(p => { map[p.partido_id] = { l: p.goles_local ?? "", v: p.goles_visita ?? "", supl: p.ganador_supl || "", pen: p.ganador_pen || "" } })
@@ -52,7 +51,6 @@ export default function App() {
     setLoading(false)
   }
 
-  // Guardar fase
   const handleGuardar = async (nuevos) => {
     if (!jugador) return
     setGuardando(true)
@@ -64,45 +62,37 @@ export default function App() {
     alert("✅ ¡Pronósticos guardados!")
   }
 
-  // Calcular puntos localmente para mostrar feedback inmediato
   const calcPts = (pid, pro) => {
     const r = resultados[pid]
     if (!r || pro.l === "" || pro.v === "") return 0
     const fase = PARTIDOS.find(p => p.id === pid)?.fase
-    const esElim = fase && ["r16","r8","r4","semi","final"].includes(fase)
+    const esElim = ES_ELIMINATORIA(fase)
 
     const esEmpate90Real = r.l === r.v
     const esEmpate90Pro = parseInt(pro.l) === parseInt(pro.v)
     const exacto90 = parseInt(pro.l) === r.l && parseInt(pro.v) === r.v
 
     if (!esElim) {
-      // GRUPOS: exacto=3, ganador/empate correcto=1
       if (exacto90) return 3
       const rs = r.l > r.v ? 1 : r.l < r.v ? -1 : 0
       const ps = parseInt(pro.l) > parseInt(pro.v) ? 1 : parseInt(pro.l) < parseInt(pro.v) ? -1 : 0
       return rs === ps ? 1 : 0
     }
 
-    // ELIMINATORIAS
     let pts = 0
-
-    // Puntaje 90 min
     if (exacto90) {
-      pts += 4 // exacto = 4 (3 ganador + 1 bonus)
+      pts += 4
     } else if (esEmpate90Real && esEmpate90Pro) {
-      pts += 1 // empate correcto = 1
+      pts += 1
     } else {
       const rsGan = r.l > r.v ? "l" : r.l < r.v ? "v" : null
       const psGan = parseInt(pro.l) > parseInt(pro.v) ? "l" : parseInt(pro.l) < parseInt(pro.v) ? "v" : null
-      if (rsGan && psGan && rsGan === psGan) pts += 3 // ganador correcto = 3
+      if (rsGan && psGan && rsGan === psGan) pts += 3
     }
 
-    // Puntaje suplementario (solo si hubo empate en 90)
     if (esEmpate90Real && r.supl && pro.supl) {
       if (pro.supl === r.supl) pts += 1
     }
-
-    // Puntaje penales (solo si hubo empate en supl)
     if (esEmpate90Real && r.supl === "empate" && r.pen && pro.pen) {
       if (pro.pen === r.pen) pts += 1
     }
@@ -116,7 +106,6 @@ export default function App() {
 
   return (
     <div className="app-wrap">
-      {/* Header */}
       <header className="header">
         <div className="header-inner">
           <div className="header-logo">
@@ -145,7 +134,6 @@ export default function App() {
       <main className="main-content">
         {vista === "pronosticos" && (
           <div>
-            {/* Tabs de fases */}
             <div className="fase-tabs">
               {FASES.map(f => (
                 <button key={f.id} className={`fase-tab${faseActiva === f.id ? " active" : ""}`}
@@ -172,14 +160,15 @@ export default function App() {
             onAuth={() => setIsAdmin(true)}
             partidos={PARTIDOS}
             resultados={resultados}
-            onGuardarResultado={async (pid, l, v) => {
-              await upsertResultado(pid, l, v)
+            onGuardarResultado={async (pid, l, v, supl, pen) => {
+              await upsertResultado(pid, l, v, supl, pen)
               await recalcularPuntos()
               await cargarGlobales()
             }}
           />
         )}
       </main>
+
       <footer className="lps-footer">
         <span>⚽ Prode organizado por</span>
         <strong>🔥 LPS Seguridad</strong>

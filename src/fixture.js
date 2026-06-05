@@ -1,138 +1,119 @@
-// Fixture oficial Mundial 2026 — grupos, fechas, horarios ARG y estadios
-export const GRUPOS = {
-  A: ["🇲🇽 México", "🇿🇦 Sudáfrica", "🇰🇷 Corea del Sur", "🇨🇿 R. Checa"],
-  B: ["🇨🇦 Canadá", "🇧🇦 Bosnia-Herz.", "🇶🇦 Qatar", "🇨🇭 Suiza"],
-  C: ["🇧🇷 Brasil", "🇲🇦 Marruecos", "🇭🇹 Haití", "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escocia"],
-  D: ["🇺🇸 EE.UU.", "🇵🇾 Paraguay", "🇦🇺 Australia", "🇹🇷 Turquía"],
-  E: ["🇩🇪 Alemania", "🇨🇼 Curazao", "🇨🇮 Costa de Marfil", "🇪🇨 Ecuador"],
-  F: ["🇳🇱 Países Bajos", "🇯🇵 Japón", "🇸🇪 Suecia", "🇹🇳 Túnez"],
-  G: ["🇧🇪 Bélgica", "🇪🇬 Egipto", "🇮🇷 Irán", "🇳🇿 Nueva Zelanda"],
-  H: ["🇪🇸 España", "🇨🇻 Cabo Verde", "🇸🇦 Arabia Saudí", "🇺🇾 Uruguay"],
-  I: ["🇫🇷 Francia", "🇸🇳 Senegal", "🇮🇶 Irak", "🇳🇴 Noruega"],
-  J: ["🇦🇷 Argentina", "🇩🇿 Argelia", "🇦🇹 Austria", "🇯🇴 Jordania"],
-  K: ["🇵🇹 Portugal", "🇨🇩 RD Congo", "🇺🇿 Uzbekistán", "🇨🇴 Colombia"],
-  L: ["🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra", "🇭🇷 Croacia", "🇬🇭 Ghana", "🇵🇦 Panamá"],
-};
-
-// Fase de grupos completa con fechas, horarios ARG y estadios
-const PARTIDOS_GRUPOS = [
-  // ── GRUPO A ──
-  { id:1,  fase:"grupos", subfase:"Grupo A", jornada:1, local:"🇲🇽 México",        visita:"🇿🇦 Sudáfrica",       fecha:"Jue 11 Jun", hora:"16:00", estadio:"Estadio Azteca, Ciudad de México" },
-  { id:2,  fase:"grupos", subfase:"Grupo A", jornada:1, local:"🇰🇷 Corea del Sur", visita:"🇨🇿 R. Checa",        fecha:"Jue 11 Jun", hora:"23:00", estadio:"Estadio Guadalajara" },
-  { id:3,  fase:"grupos", subfase:"Grupo A", jornada:2, local:"🇨🇿 R. Checa",      visita:"🇿🇦 Sudáfrica",       fecha:"Jue 18 Jun", hora:"13:00", estadio:"Atlanta Stadium" },
-  { id:4,  fase:"grupos", subfase:"Grupo A", jornada:2, local:"🇲🇽 México",        visita:"🇰🇷 Corea del Sur",   fecha:"Jue 18 Jun", hora:"22:00", estadio:"Estadio Guadalajara" },
-  { id:5,  fase:"grupos", subfase:"Grupo A", jornada:3, local:"🇨🇿 R. Checa",      visita:"🇲🇽 México",          fecha:"Mar 24 Jun", hora:"22:00", estadio:"Estadio Azteca, Ciudad de México" },
-  { id:6,  fase:"grupos", subfase:"Grupo A", jornada:3, local:"🇿🇦 Sudáfrica",     visita:"🇰🇷 Corea del Sur",   fecha:"Mar 24 Jun", hora:"22:00", estadio:"Estadio Monterrey" },
-  // ── GRUPO B ──
-  { id:7,  fase:"grupos", subfase:"Grupo B", jornada:1, local:"🇨🇦 Canadá",        visita:"🇧🇦 Bosnia-Herz.",    fecha:"Vie 12 Jun", hora:"16:00", estadio:"Toronto Stadium" },
-  { id:8,  fase:"grupos", subfase:"Grupo B", jornada:1, local:"🇶🇦 Qatar",         visita:"🇨🇭 Suiza",           fecha:"Sáb 13 Jun", hora:"16:00", estadio:"San Francisco Bay Area Stadium" },
-  { id:9,  fase:"grupos", subfase:"Grupo B", jornada:2, local:"🇨🇭 Suiza",         visita:"🇧🇦 Bosnia-Herz.",    fecha:"Jue 18 Jun", hora:"16:00", estadio:"Los Angeles Stadium" },
-  { id:10, fase:"grupos", subfase:"Grupo B", jornada:2, local:"🇨🇦 Canadá",        visita:"🇶🇦 Qatar",           fecha:"Jue 18 Jun", hora:"19:00", estadio:"BC Place Vancouver" },
-  { id:11, fase:"grupos", subfase:"Grupo B", jornada:3, local:"🇨🇭 Suiza",         visita:"🇨🇦 Canadá",          fecha:"Mié 24 Jun", hora:"16:00", estadio:"BC Place Vancouver" },
-  { id:12, fase:"grupos", subfase:"Grupo B", jornada:3, local:"🇧🇦 Bosnia-Herz.",  visita:"🇶🇦 Qatar",           fecha:"Mié 24 Jun", hora:"16:00", estadio:"Seattle Stadium" },
-  // ── GRUPO C ──
-  { id:13, fase:"grupos", subfase:"Grupo C", jornada:1, local:"🇧🇷 Brasil",        visita:"🇲🇦 Marruecos",       fecha:"Sáb 13 Jun", hora:"19:00", estadio:"MetLife, Nueva York/Nueva Jersey" },
-  { id:14, fase:"grupos", subfase:"Grupo C", jornada:1, local:"🇭🇹 Haití",         visita:"🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escocia",        fecha:"Sáb 13 Jun", hora:"22:00", estadio:"Boston Stadium" },
-  { id:15, fase:"grupos", subfase:"Grupo C", jornada:2, local:"🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escocia",      visita:"🇲🇦 Marruecos",       fecha:"Vie 19 Jun", hora:"19:00", estadio:"Boston Stadium" },
-  { id:16, fase:"grupos", subfase:"Grupo C", jornada:2, local:"🇧🇷 Brasil",        visita:"🇭🇹 Haití",           fecha:"Vie 19 Jun", hora:"22:00", estadio:"Philadelphia Stadium" },
-  { id:17, fase:"grupos", subfase:"Grupo C", jornada:3, local:"🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escocia",      visita:"🇧🇷 Brasil",          fecha:"Mié 24 Jun", hora:"19:00", estadio:"Miami Stadium" },
-  { id:18, fase:"grupos", subfase:"Grupo C", jornada:3, local:"🇲🇦 Marruecos",     visita:"🇭🇹 Haití",           fecha:"Mié 24 Jun", hora:"19:00", estadio:"Atlanta Stadium" },
-  // ── GRUPO D ──
-  { id:19, fase:"grupos", subfase:"Grupo D", jornada:1, local:"🇺🇸 EE.UU.",        visita:"🇵🇾 Paraguay",        fecha:"Vie 12 Jun", hora:"22:00", estadio:"Los Angeles Stadium" },
-  { id:20, fase:"grupos", subfase:"Grupo D", jornada:1, local:"🇦🇺 Australia",     visita:"🇹🇷 Turquía",         fecha:"Dom 13 Jun", hora:"01:00*",estadio:"BC Place Vancouver" },
-  { id:21, fase:"grupos", subfase:"Grupo D", jornada:2, local:"🇺🇸 EE.UU.",        visita:"🇦🇺 Australia",       fecha:"Vie 19 Jun", hora:"16:00", estadio:"Seattle Stadium" },
-  { id:22, fase:"grupos", subfase:"Grupo D", jornada:2, local:"🇹🇷 Turquía",       visita:"🇵🇾 Paraguay",        fecha:"Sáb 20 Jun", hora:"01:00*",estadio:"San Francisco Bay Area Stadium" },
-  { id:23, fase:"grupos", subfase:"Grupo D", jornada:3, local:"🇹🇷 Turquía",       visita:"🇺🇸 EE.UU.",          fecha:"Jue 25 Jun", hora:"23:00", estadio:"Los Angeles Stadium" },
-  { id:24, fase:"grupos", subfase:"Grupo D", jornada:3, local:"🇵🇾 Paraguay",      visita:"🇦🇺 Australia",       fecha:"Jue 25 Jun", hora:"23:00", estadio:"San Francisco Bay Area Stadium" },
-  // ── GRUPO E ──
-  { id:25, fase:"grupos", subfase:"Grupo E", jornada:1, local:"🇩🇪 Alemania",      visita:"🇨🇼 Curazao",         fecha:"Dom 14 Jun", hora:"14:00", estadio:"Houston Stadium" },
-  { id:26, fase:"grupos", subfase:"Grupo E", jornada:1, local:"🇨🇮 Costa de Marfil",visita:"🇪🇨 Ecuador",        fecha:"Dom 14 Jun", hora:"20:00", estadio:"Philadelphia Stadium" },
-  { id:27, fase:"grupos", subfase:"Grupo E", jornada:2, local:"🇩🇪 Alemania",      visita:"🇨🇮 Costa de Marfil", fecha:"Sáb 20 Jun", hora:"17:00", estadio:"Toronto Stadium" },
-  { id:28, fase:"grupos", subfase:"Grupo E", jornada:2, local:"🇪🇨 Ecuador",       visita:"🇨🇼 Curazao",         fecha:"Sáb 20 Jun", hora:"21:00", estadio:"Kansas City Stadium" },
-  { id:29, fase:"grupos", subfase:"Grupo E", jornada:3, local:"🇪🇨 Ecuador",       visita:"🇩🇪 Alemania",        fecha:"Jue 25 Jun", hora:"17:00", estadio:"MetLife, Nueva York/Nueva Jersey" },
-  { id:30, fase:"grupos", subfase:"Grupo E", jornada:3, local:"🇨🇼 Curazao",       visita:"🇨🇮 Costa de Marfil", fecha:"Jue 25 Jun", hora:"17:00", estadio:"Philadelphia Stadium" },
-  // ── GRUPO F ──
-  { id:31, fase:"grupos", subfase:"Grupo F", jornada:1, local:"🇳🇱 Países Bajos",  visita:"🇯🇵 Japón",           fecha:"Dom 14 Jun", hora:"17:00", estadio:"Dallas Stadium" },
-  { id:32, fase:"grupos", subfase:"Grupo F", jornada:1, local:"🇸🇪 Suecia",        visita:"🇹🇳 Túnez",           fecha:"Dom 14 Jun", hora:"23:00", estadio:"Estadio Monterrey" },
-  { id:33, fase:"grupos", subfase:"Grupo F", jornada:2, local:"🇳🇱 Países Bajos",  visita:"🇸🇪 Suecia",          fecha:"Sáb 20 Jun", hora:"14:00", estadio:"Houston Stadium" },
-  { id:34, fase:"grupos", subfase:"Grupo F", jornada:2, local:"🇹🇳 Túnez",         visita:"🇯🇵 Japón",           fecha:"Dom 21 Jun", hora:"01:00*",estadio:"Estadio Monterrey" },
-  { id:35, fase:"grupos", subfase:"Grupo F", jornada:3, local:"🇹🇳 Túnez",         visita:"🇳🇱 Países Bajos",    fecha:"Jue 25 Jun", hora:"20:00", estadio:"Kansas City Stadium" },
-  { id:36, fase:"grupos", subfase:"Grupo F", jornada:3, local:"🇯🇵 Japón",         visita:"🇸🇪 Suecia",          fecha:"Jue 25 Jun", hora:"20:00", estadio:"Dallas Stadium" },
-  // ── GRUPO G ──
-  { id:37, fase:"grupos", subfase:"Grupo G", jornada:1, local:"🇧🇪 Bélgica",       visita:"🇪🇬 Egipto",          fecha:"Lun 15 Jun", hora:"16:00", estadio:"Seattle Stadium" },
-  { id:38, fase:"grupos", subfase:"Grupo G", jornada:1, local:"🇮🇷 Irán",          visita:"🇳🇿 Nueva Zelanda",   fecha:"Lun 15 Jun", hora:"22:00", estadio:"Los Angeles Stadium" },
-  { id:39, fase:"grupos", subfase:"Grupo G", jornada:2, local:"🇧🇪 Bélgica",       visita:"🇮🇷 Irán",            fecha:"Dom 21 Jun", hora:"16:00", estadio:"Los Angeles Stadium" },
-  { id:40, fase:"grupos", subfase:"Grupo G", jornada:2, local:"🇳🇿 Nueva Zelanda", visita:"🇪🇬 Egipto",          fecha:"Dom 21 Jun", hora:"22:00", estadio:"BC Place Vancouver" },
-  { id:41, fase:"grupos", subfase:"Grupo G", jornada:3, local:"🇳🇿 Nueva Zelanda", visita:"🇧🇪 Bélgica",         fecha:"Sáb 27 Jun", hora:"00:00*",estadio:"BC Place Vancouver" },
-  { id:42, fase:"grupos", subfase:"Grupo G", jornada:3, local:"🇪🇬 Egipto",        visita:"🇮🇷 Irán",            fecha:"Sáb 27 Jun", hora:"00:00*",estadio:"Seattle Stadium" },
-  // ── GRUPO H ──
-  { id:43, fase:"grupos", subfase:"Grupo H", jornada:1, local:"🇪🇸 España",        visita:"🇨🇻 Cabo Verde",      fecha:"Lun 15 Jun", hora:"13:00", estadio:"Atlanta Stadium" },
-  { id:44, fase:"grupos", subfase:"Grupo H", jornada:1, local:"🇸🇦 Arabia Saudí",  visita:"🇺🇾 Uruguay",         fecha:"Lun 15 Jun", hora:"19:00", estadio:"Miami Stadium" },
-  { id:45, fase:"grupos", subfase:"Grupo H", jornada:2, local:"🇪🇸 España",        visita:"🇸🇦 Arabia Saudí",    fecha:"Dom 21 Jun", hora:"13:00", estadio:"Atlanta Stadium" },
-  { id:46, fase:"grupos", subfase:"Grupo H", jornada:2, local:"🇺🇾 Uruguay",       visita:"🇨🇻 Cabo Verde",      fecha:"Dom 21 Jun", hora:"19:00", estadio:"Miami Stadium" },
-  { id:47, fase:"grupos", subfase:"Grupo H", jornada:3, local:"🇺🇾 Uruguay",       visita:"🇪🇸 España",          fecha:"Vie 26 Jun", hora:"21:00", estadio:"Estadio Guadalajara" },
-  { id:48, fase:"grupos", subfase:"Grupo H", jornada:3, local:"🇨🇻 Cabo Verde",    visita:"🇸🇦 Arabia Saudí",    fecha:"Vie 26 Jun", hora:"21:00", estadio:"Houston Stadium" },
-  // ── GRUPO I ──
-  { id:49, fase:"grupos", subfase:"Grupo I", jornada:1, local:"🇫🇷 Francia",       visita:"🇸🇳 Senegal",         fecha:"Mar 16 Jun", hora:"16:00", estadio:"MetLife, Nueva York/Nueva Jersey" },
-  { id:50, fase:"grupos", subfase:"Grupo I", jornada:1, local:"🇮🇶 Irak",          visita:"🇳🇴 Noruega",         fecha:"Mar 16 Jun", hora:"19:00", estadio:"Boston Stadium" },
-  { id:51, fase:"grupos", subfase:"Grupo I", jornada:2, local:"🇫🇷 Francia",       visita:"🇮🇶 Irak",            fecha:"Lun 22 Jun", hora:"18:00", estadio:"Philadelphia Stadium" },
-  { id:52, fase:"grupos", subfase:"Grupo I", jornada:2, local:"🇳🇴 Noruega",       visita:"🇸🇳 Senegal",         fecha:"Lun 22 Jun", hora:"21:00", estadio:"MetLife, Nueva York/Nueva Jersey" },
-  { id:53, fase:"grupos", subfase:"Grupo I", jornada:3, local:"🇳🇴 Noruega",       visita:"🇫🇷 Francia",         fecha:"Vie 26 Jun", hora:"16:00", estadio:"Boston Stadium" },
-  { id:54, fase:"grupos", subfase:"Grupo I", jornada:3, local:"🇸🇳 Senegal",       visita:"🇮🇶 Irak",            fecha:"Vie 26 Jun", hora:"16:00", estadio:"Toronto Stadium" },
-  // ── GRUPO J ──
-  { id:55, fase:"grupos", subfase:"Grupo J", jornada:1, local:"🇦🇷 Argentina",     visita:"🇩🇿 Argelia",         fecha:"Mar 16 Jun", hora:"22:00", estadio:"Kansas City Stadium" },
-  { id:56, fase:"grupos", subfase:"Grupo J", jornada:1, local:"🇦🇹 Austria",       visita:"🇯🇴 Jordania",        fecha:"Mié 17 Jun", hora:"01:00*",estadio:"San Francisco Bay Area Stadium" },
-  { id:57, fase:"grupos", subfase:"Grupo J", jornada:2, local:"🇦🇷 Argentina",     visita:"🇦🇹 Austria",         fecha:"Lun 22 Jun", hora:"14:00", estadio:"Dallas Stadium" },
-  { id:58, fase:"grupos", subfase:"Grupo J", jornada:2, local:"🇯🇴 Jordania",      visita:"🇩🇿 Argelia",         fecha:"Mar 23 Jun", hora:"00:00*",estadio:"San Francisco Bay Area Stadium" },
-  { id:59, fase:"grupos", subfase:"Grupo J", jornada:3, local:"🇦🇷 Argentina",     visita:"🇯🇴 Jordania",        fecha:"Sáb 27 Jun", hora:"23:00", estadio:"Dallas Stadium" },
-  { id:60, fase:"grupos", subfase:"Grupo J", jornada:3, local:"🇩🇿 Argelia",       visita:"🇦🇹 Austria",         fecha:"Sáb 27 Jun", hora:"23:00", estadio:"Kansas City Stadium" },
-  // ── GRUPO K ──
-  { id:61, fase:"grupos", subfase:"Grupo K", jornada:1, local:"🇵🇹 Portugal",      visita:"🇨🇩 RD Congo",        fecha:"Mié 17 Jun", hora:"14:00", estadio:"Houston Stadium" },
-  { id:62, fase:"grupos", subfase:"Grupo K", jornada:1, local:"🇺🇿 Uzbekistán",    visita:"🇨🇴 Colombia",        fecha:"Mié 17 Jun", hora:"23:00", estadio:"Estadio Azteca, Ciudad de México" },
-  { id:63, fase:"grupos", subfase:"Grupo K", jornada:2, local:"🇵🇹 Portugal",      visita:"🇺🇿 Uzbekistán",      fecha:"Mar 23 Jun", hora:"14:00", estadio:"Houston Stadium" },
-  { id:64, fase:"grupos", subfase:"Grupo K", jornada:2, local:"🇨🇴 Colombia",      visita:"🇨🇩 RD Congo",        fecha:"Mar 23 Jun", hora:"23:00", estadio:"Estadio Guadalajara" },
-  { id:65, fase:"grupos", subfase:"Grupo K", jornada:3, local:"🇨🇴 Colombia",      visita:"🇵🇹 Portugal",        fecha:"Sáb 27 Jun", hora:"20:30", estadio:"Miami Stadium" },
-  { id:66, fase:"grupos", subfase:"Grupo K", jornada:3, local:"🇨🇩 RD Congo",      visita:"🇺🇿 Uzbekistán",      fecha:"Sáb 27 Jun", hora:"20:30", estadio:"Atlanta Stadium" },
-  // ── GRUPO L ──
-  { id:67, fase:"grupos", subfase:"Grupo L", jornada:1, local:"🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra",  visita:"🇭🇷 Croacia",          fecha:"Mié 17 Jun", hora:"17:00", estadio:"Dallas Stadium" },
-  { id:68, fase:"grupos", subfase:"Grupo L", jornada:1, local:"🇬🇭 Ghana",         visita:"🇵🇦 Panamá",          fecha:"Mié 17 Jun", hora:"20:00", estadio:"Toronto Stadium" },
-  { id:69, fase:"grupos", subfase:"Grupo L", jornada:2, local:"🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra",  visita:"🇬🇭 Ghana",            fecha:"Mar 23 Jun", hora:"17:00", estadio:"Boston Stadium" },
-  { id:70, fase:"grupos", subfase:"Grupo L", jornada:2, local:"🇵🇦 Panamá",        visita:"🇭🇷 Croacia",         fecha:"Mar 23 Jun", hora:"20:00", estadio:"Toronto Stadium" },
-  { id:71, fase:"grupos", subfase:"Grupo L", jornada:3, local:"🇵🇦 Panamá",        visita:"🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra",   fecha:"Sáb 27 Jun", hora:"18:00", estadio:"MetLife, Nueva York/Nueva Jersey" },
-  { id:72, fase:"grupos", subfase:"Grupo L", jornada:3, local:"🇭🇷 Croacia",       visita:"🇬🇭 Ghana",           fecha:"Sáb 27 Jun", hora:"18:00", estadio:"Philadelphia Stadium" },
-];
-
-function generarFasesEliminatorias() {
-  let partidos = [];
-  let pid = 73;
-
-  for (let i = 1; i <= 16; i++) {
-    partidos.push({ id: pid++, fase: "r32", subfase: "1ra Fase", local: `Clasificado R32-${(i*2)-1}`, visita: `Clasificado R32-${i*2}` });
-  }
-  for (let i = 1; i <= 8; i++) {
-    partidos.push({ id: pid++, fase: "r16", subfase: "16avos de Final", local: `Gan. 1ra Fase ${(i*2)-1}`, visita: `Gan. 1ra Fase ${i*2}` });
-  }
-  for (let i = 1; i <= 4; i++) {
-    partidos.push({ id: pid++, fase: "r8", subfase: "8avos de Final", local: `Gan. 16avos ${(i*2)-1}`, visita: `Gan. 16avos ${i*2}` });
-  }
-  for (let i = 1; i <= 2; i++) {
-    partidos.push({ id: pid++, fase: "r4", subfase: "Cuartos de Final", local: `Gan. 8avos ${(i*2)-1}`, visita: `Gan. 8avos ${i*2}` });
-  }
-  partidos.push({ id: pid++, fase: "semi", subfase: "Semifinal", local: "Gan. Cuarto 1", visita: "Gan. Cuarto 2" });
-  partidos.push({ id: pid++, fase: "semi", subfase: "Semifinal", local: "Gan. Cuarto 3", visita: "Gan. Cuarto 4" });
-  partidos.push({ id: pid++, fase: "final", subfase: "3er y 4to Puesto", local: "Perd. Semifinal 1", visita: "Perd. Semifinal 2", fecha: "Sáb 18 Jul", hora: "20:00", estadio: "AT&T Stadium, Dallas" });
-  partidos.push({ id: pid++, fase: "final", subfase: "⭐ Gran Final", local: "Gan. Semifinal 1", visita: "Gan. Semifinal 2", fecha: "Dom 19 Jul", hora: "19:00", estadio: "MetLife Stadium, Nueva York/Nueva Jersey" });
-  return partidos;
-}
-
-export const PARTIDOS = [...PARTIDOS_GRUPOS, ...generarFasesEliminatorias()];
+// fixture.js — Mundial 2026 · 104 partidos · generado desde WCup_2026_4_2_6_en.xlsx
+// Grupos A-L (48 equipos), Ronda 32, Octavos, Cuartos, Semis, 3er puesto, Final
 
 export const FASES = [
-  { id: "grupos", label: "Grupos" },
-  { id: "r32",    label: "1ra Fase" },
-  { id: "r16",    label: "16avos" },
-  { id: "r8",     label: "8avos" },
-  { id: "r4",     label: "Cuartos" },
-  { id: "semi",   label: "Semis" },
-  { id: "final",  label: "Final" },
-];
+  { id: "grupos", label: "🌍 Grupos" },
+  { id: "r32",    label: "⚔️ Ronda 32" },
+  { id: "r16",    label: "🏆 Octavos" },
+  { id: "r8",     label: "🔥 Cuartos" },
+  { id: "semi",   label: "🌟 Semis" },
+  { id: "3ro",    label: "🥉 3er Puesto" },
+  { id: "final",  label: "🏅 Final" },
+]
+
+export const PARTIDOS = [
+  { id: 1, fase: "grupos", subfase: "Grupo A", local: "🇲🇽 Mexico", visita: "🇿🇦 South Africa", fecha: "11 Jun", hora: "15:00", estadio: "Azteca · Ciudad de México" },
+  { id: 2, fase: "grupos", subfase: "Grupo A", local: "🇰🇷 Rep. of Korea", visita: "🇨🇿 Czech Rep.", fecha: "11 Jun", hora: "22:00", estadio: "BBVA · Monterrey" },
+  { id: 3, fase: "grupos", subfase: "Grupo B", local: "🇨🇦 Canada", visita: "🇧🇦 Bosnia/Herzeg.", fecha: "12 Jun", hora: "15:00", estadio: "MetLife Stadium · Nueva York" },
+  { id: 4, fase: "grupos", subfase: "Grupo D", local: "🇺🇸 USA", visita: "🇵🇾 Paraguay", fecha: "12 Jun", hora: "21:00", estadio: "Arrowhead · Kansas City" },
+  { id: 5, fase: "grupos", subfase: "Grupo C", local: "🇭🇹 Haiti", visita: "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland", fecha: "13 Jun", hora: "21:00", estadio: "Hard Rock · Miami" },
+  { id: 6, fase: "grupos", subfase: "Grupo D", local: "🇦🇺 Australia", visita: "🇹🇷 Turkey", fecha: "14 Jun", hora: "00:00", estadio: "AT&T Stadium · Dallas" },
+  { id: 7, fase: "grupos", subfase: "Grupo C", local: "🇧🇷 Brazil", visita: "🇲🇦 Morocco", fecha: "13 Jun", hora: "18:00", estadio: "SoFi Stadium · Los Ángeles" },
+  { id: 8, fase: "grupos", subfase: "Grupo B", local: "🇶🇦 Qatar", visita: "🇨🇭 Switzerland", fecha: "13 Jun", hora: "15:00", estadio: "Gillette Stadium · Boston" },
+  { id: 9, fase: "grupos", subfase: "Grupo E", local: "🇨🇮 Ivory Coast", visita: "🇪🇨 Ecuador", fecha: "14 Jun", hora: "19:00", estadio: "NRG Stadium · Houston" },
+  { id: 10, fase: "grupos", subfase: "Grupo E", local: "🇩🇪 Germany", visita: "🇨🇼 Curaçao", fecha: "14 Jun", hora: "13:00", estadio: "Lumen Field · Seattle" },
+  { id: 11, fase: "grupos", subfase: "Grupo F", local: "🇳🇱 Netherlands", visita: "🇯🇵 Japan", fecha: "14 Jun", hora: "16:00", estadio: "Levi's Stadium · San José" },
+  { id: 12, fase: "grupos", subfase: "Grupo F", local: "🇸🇪 Sweden", visita: "🇹🇳 Tunisia", fecha: "14 Jun", hora: "22:00", estadio: "Akron · Guadalajara" },
+  { id: 13, fase: "grupos", subfase: "Grupo H", local: "🇸🇦 Saudi Arabia", visita: "🇺🇾 Uruguay", fecha: "15 Jun", hora: "18:00", estadio: "Mercedes-Benz · Atlanta" },
+  { id: 14, fase: "grupos", subfase: "Grupo H", local: "🇪🇸 Spain", visita: "🇨🇻 Cape Verde", fecha: "15 Jun", hora: "12:00", estadio: "BC Place · Vancouver" },
+  { id: 15, fase: "grupos", subfase: "Grupo G", local: "🇮🇷 IR Iran", visita: "🇳🇿 New Zealand", fecha: "15 Jun", hora: "21:00", estadio: "Arrowhead · Kansas City" },
+  { id: 16, fase: "grupos", subfase: "Grupo G", local: "🇧🇪 Belgium", visita: "🇪🇬 Egypt", fecha: "15 Jun", hora: "15:00", estadio: "Lincoln Financial · Philadelphia" },
+  { id: 17, fase: "grupos", subfase: "Grupo I", local: "🇫🇷 France", visita: "🇸🇳 Senegal", fecha: "16 Jun", hora: "15:00", estadio: "SoFi Stadium · Los Ángeles" },
+  { id: 18, fase: "grupos", subfase: "Grupo I", local: "🇮🇶 Iraq", visita: "🇳🇴 Norway", fecha: "16 Jun", hora: "18:00", estadio: "Hard Rock · Miami" },
+  { id: 19, fase: "grupos", subfase: "Grupo J", local: "🇦🇷 Argentina", visita: "🇩🇿 Algeria", fecha: "16 Jun", hora: "21:00", estadio: "Rose Bowl · Los Ángeles" },
+  { id: 20, fase: "grupos", subfase: "Grupo J", local: "🇦🇹 Austria", visita: "🇯🇴 Jordan", fecha: "17 Jun", hora: "00:00", estadio: "Gillette Stadium · Boston" },
+  { id: 21, fase: "grupos", subfase: "Grupo L", local: "🇬🇭 Ghana", visita: "🇵🇦 Panama", fecha: "17 Jun", hora: "19:00", estadio: "MetLife Stadium · Nueva York" },
+  { id: 22, fase: "grupos", subfase: "Grupo L", local: "🏴󠁧󠁢󠁥󠁮󠁧󠁿 England", visita: "🇭🇷 Croatia", fecha: "17 Jun", hora: "16:00", estadio: "Levi's Stadium · San José" },
+  { id: 23, fase: "grupos", subfase: "Grupo K", local: "🇵🇹 Portugal", visita: "🇨🇩 DR Congo", fecha: "17 Jun", hora: "13:00", estadio: "Lumen Field · Seattle" },
+  { id: 24, fase: "grupos", subfase: "Grupo K", local: "🇺🇿 Uzbekistan", visita: "🇨🇴 Colombia", fecha: "17 Jun", hora: "22:00", estadio: "Azteca · Ciudad de México" },
+  { id: 25, fase: "grupos", subfase: "Grupo A", local: "🇨🇿 Czech Rep.", visita: "🇿🇦 South Africa", fecha: "18 Jun", hora: "12:00", estadio: "BC Place · Vancouver" },
+  { id: 26, fase: "grupos", subfase: "Grupo B", local: "🇨🇭 Switzerland", visita: "🇧🇦 Bosnia/Herzeg.", fecha: "18 Jun", hora: "15:00", estadio: "Arrowhead · Kansas City" },
+  { id: 27, fase: "grupos", subfase: "Grupo B", local: "🇨🇦 Canada", visita: "🇶🇦 Qatar", fecha: "18 Jun", hora: "18:00", estadio: "AT&T Stadium · Dallas" },
+  { id: 28, fase: "grupos", subfase: "Grupo A", local: "🇲🇽 Mexico", visita: "🇰🇷 Rep. of Korea", fecha: "18 Jun", hora: "21:00", estadio: "BBVA · Monterrey" },
+  { id: 29, fase: "grupos", subfase: "Grupo C", local: "🇧🇷 Brazil", visita: "🇭🇹 Haiti", fecha: "19 Jun", hora: "20:30", estadio: "NRG Stadium · Houston" },
+  { id: 30, fase: "grupos", subfase: "Grupo C", local: "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland", visita: "🇲🇦 Morocco", fecha: "19 Jun", hora: "18:00", estadio: "Hard Rock · Miami" },
+  { id: 31, fase: "grupos", subfase: "Grupo D", local: "🇹🇷 Turkey", visita: "🇵🇾 Paraguay", fecha: "19 Jun", hora: "23:00", estadio: "Gillette Stadium · Boston" },
+  { id: 32, fase: "grupos", subfase: "Grupo D", local: "🇺🇸 USA", visita: "🇦🇺 Australia", fecha: "19 Jun", hora: "15:00", estadio: "Lincoln Financial · Philadelphia" },
+  { id: 33, fase: "grupos", subfase: "Grupo E", local: "🇩🇪 Germany", visita: "🇨🇮 Ivory Coast", fecha: "20 Jun", hora: "16:00", estadio: "MetLife Stadium · Nueva York" },
+  { id: 34, fase: "grupos", subfase: "Grupo E", local: "🇪🇨 Ecuador", visita: "🇨🇼 Curaçao", fecha: "20 Jun", hora: "20:00", estadio: "Rose Bowl · Los Ángeles" },
+  { id: 35, fase: "grupos", subfase: "Grupo F", local: "🇳🇱 Netherlands", visita: "🇸🇪 Sweden", fecha: "20 Jun", hora: "13:00", estadio: "Lumen Field · Seattle" },
+  { id: 36, fase: "grupos", subfase: "Grupo F", local: "🇹🇳 Tunisia", visita: "🇯🇵 Japan", fecha: "21 Jun", hora: "00:00", estadio: "Akron · Guadalajara" },
+  { id: 37, fase: "grupos", subfase: "Grupo H", local: "🇺🇾 Uruguay", visita: "🇨🇻 Cape Verde", fecha: "21 Jun", hora: "18:00", estadio: "Mercedes-Benz · Atlanta" },
+  { id: 38, fase: "grupos", subfase: "Grupo H", local: "🇪🇸 Spain", visita: "🇸🇦 Saudi Arabia", fecha: "21 Jun", hora: "12:00", estadio: "BC Place · Vancouver" },
+  { id: 39, fase: "grupos", subfase: "Grupo G", local: "🇧🇪 Belgium", visita: "🇮🇷 IR Iran", fecha: "21 Jun", hora: "15:00", estadio: "Arrowhead · Kansas City" },
+  { id: 40, fase: "grupos", subfase: "Grupo G", local: "🇳🇿 New Zealand", visita: "🇪🇬 Egypt", fecha: "21 Jun", hora: "21:00", estadio: "AT&T Stadium · Dallas" },
+  { id: 41, fase: "grupos", subfase: "Grupo I", local: "🇳🇴 Norway", visita: "🇸🇳 Senegal", fecha: "22 Jun", hora: "20:00", estadio: "SoFi Stadium · Los Ángeles" },
+  { id: 42, fase: "grupos", subfase: "Grupo I", local: "🇫🇷 France", visita: "🇮🇶 Iraq", fecha: "22 Jun", hora: "17:00", estadio: "NRG Stadium · Houston" },
+  { id: 43, fase: "grupos", subfase: "Grupo J", local: "🇦🇷 Argentina", visita: "🇦🇹 Austria", fecha: "22 Jun", hora: "13:00", estadio: "Levi's Stadium · San José" },
+  { id: 44, fase: "grupos", subfase: "Grupo J", local: "🇯🇴 Jordan", visita: "🇩🇿 Algeria", fecha: "22 Jun", hora: "23:00", estadio: "Gillette Stadium · Boston" },
+  { id: 45, fase: "grupos", subfase: "Grupo L", local: "🏴󠁧󠁢󠁥󠁮󠁧󠁿 England", visita: "🇬🇭 Ghana", fecha: "23 Jun", hora: "16:00", estadio: "Hard Rock · Miami" },
+  { id: 46, fase: "grupos", subfase: "Grupo L", local: "🇵🇦 Panama", visita: "🇭🇷 Croatia", fecha: "23 Jun", hora: "19:00", estadio: "MetLife Stadium · Nueva York" },
+  { id: 47, fase: "grupos", subfase: "Grupo K", local: "🇵🇹 Portugal", visita: "🇺🇿 Uzbekistan", fecha: "23 Jun", hora: "13:00", estadio: "Lumen Field · Seattle" },
+  { id: 48, fase: "grupos", subfase: "Grupo K", local: "🇨🇴 Colombia", visita: "🇨🇩 DR Congo", fecha: "23 Jun", hora: "22:00", estadio: "BBVA · Monterrey" },
+  { id: 49, fase: "grupos", subfase: "Grupo C", local: "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland", visita: "🇧🇷 Brazil", fecha: "24 Jun", hora: "18:00", estadio: "Mercedes-Benz · Atlanta" },
+  { id: 50, fase: "grupos", subfase: "Grupo C", local: "🇲🇦 Morocco", visita: "🇭🇹 Haiti", fecha: "24 Jun", hora: "18:00", estadio: "BC Place · Vancouver" },
+  { id: 51, fase: "grupos", subfase: "Grupo B", local: "🇨🇭 Switzerland", visita: "🇨🇦 Canada", fecha: "24 Jun", hora: "15:00", estadio: "AT&T Stadium · Dallas" },
+  { id: 52, fase: "grupos", subfase: "Grupo B", local: "🇧🇦 Bosnia/Herzeg.", visita: "🇶🇦 Qatar", fecha: "24 Jun", hora: "15:00", estadio: "Lincoln Financial · Philadelphia" },
+  { id: 53, fase: "grupos", subfase: "Grupo A", local: "🇨🇿 Czech Rep.", visita: "🇲🇽 Mexico", fecha: "24 Jun", hora: "21:00", estadio: "Azteca · Ciudad de México" },
+  { id: 54, fase: "grupos", subfase: "Grupo A", local: "🇿🇦 South Africa", visita: "🇰🇷 Rep. of Korea", fecha: "24 Jun", hora: "21:00", estadio: "Akron · Guadalajara" },
+  { id: 55, fase: "grupos", subfase: "Grupo E", local: "🇨🇼 Curaçao", visita: "🇨🇮 Ivory Coast", fecha: "25 Jun", hora: "16:00", estadio: "NRG Stadium · Houston" },
+  { id: 56, fase: "grupos", subfase: "Grupo E", local: "🇪🇨 Ecuador", visita: "🇩🇪 Germany", fecha: "25 Jun", hora: "16:00", estadio: "SoFi Stadium · Los Ángeles" },
+  { id: 57, fase: "grupos", subfase: "Grupo F", local: "🇯🇵 Japan", visita: "🇸🇪 Sweden", fecha: "25 Jun", hora: "19:00", estadio: "Levi's Stadium · San José" },
+  { id: 58, fase: "grupos", subfase: "Grupo F", local: "🇹🇳 Tunisia", visita: "🇳🇱 Netherlands", fecha: "25 Jun", hora: "19:00", estadio: "Rose Bowl · Los Ángeles" },
+  { id: 59, fase: "grupos", subfase: "Grupo D", local: "🇹🇷 Turkey", visita: "🇺🇸 USA", fecha: "25 Jun", hora: "22:00", estadio: "Arrowhead · Kansas City" },
+  { id: 60, fase: "grupos", subfase: "Grupo D", local: "🇵🇾 Paraguay", visita: "🇦🇺 Australia", fecha: "25 Jun", hora: "22:00", estadio: "Gillette Stadium · Boston" },
+  { id: 61, fase: "grupos", subfase: "Grupo I", local: "🇳🇴 Norway", visita: "🇫🇷 France", fecha: "26 Jun", hora: "15:00", estadio: "Hard Rock · Miami" },
+  { id: 62, fase: "grupos", subfase: "Grupo I", local: "🇸🇳 Senegal", visita: "🇮🇶 Iraq", fecha: "26 Jun", hora: "15:00", estadio: "MetLife Stadium · Nueva York" },
+  { id: 63, fase: "grupos", subfase: "Grupo G", local: "🇪🇬 Egypt", visita: "🇮🇷 IR Iran", fecha: "26 Jun", hora: "23:00", estadio: "Lincoln Financial · Philadelphia" },
+  { id: 64, fase: "grupos", subfase: "Grupo G", local: "🇳🇿 New Zealand", visita: "🇧🇪 Belgium", fecha: "26 Jun", hora: "23:00", estadio: "AT&T Stadium · Dallas" },
+  { id: 65, fase: "grupos", subfase: "Grupo H", local: "🇨🇻 Cape Verde", visita: "🇸🇦 Saudi Arabia", fecha: "26 Jun", hora: "20:00", estadio: "Lumen Field · Seattle" },
+  { id: 66, fase: "grupos", subfase: "Grupo H", local: "🇺🇾 Uruguay", visita: "🇪🇸 Spain", fecha: "26 Jun", hora: "20:00", estadio: "BBVA · Monterrey" },
+  { id: 67, fase: "grupos", subfase: "Grupo L", local: "🇵🇦 Panama", visita: "🏴󠁧󠁢󠁥󠁮󠁧󠁿 England", fecha: "27 Jun", hora: "17:00", estadio: "SoFi Stadium · Los Ángeles" },
+  { id: 68, fase: "grupos", subfase: "Grupo L", local: "🇭🇷 Croatia", visita: "🇬🇭 Ghana", fecha: "27 Jun", hora: "17:00", estadio: "NRG Stadium · Houston" },
+  { id: 69, fase: "grupos", subfase: "Grupo J", local: "🇩🇿 Algeria", visita: "🇦🇹 Austria", fecha: "27 Jun", hora: "22:00", estadio: "Rose Bowl · Los Ángeles" },
+  { id: 70, fase: "grupos", subfase: "Grupo J", local: "🇯🇴 Jordan", visita: "🇦🇷 Argentina", fecha: "27 Jun", hora: "22:00", estadio: "Levi's Stadium · San José" },
+  { id: 71, fase: "grupos", subfase: "Grupo K", local: "🇨🇴 Colombia", visita: "🇵🇹 Portugal", fecha: "27 Jun", hora: "19:30", estadio: "Mercedes-Benz · Atlanta" },
+  { id: 72, fase: "grupos", subfase: "Grupo K", local: "🇨🇩 DR Congo", visita: "🇺🇿 Uzbekistan", fecha: "27 Jun", hora: "19:30", estadio: "BC Place · Vancouver" },
+  { id: 73, fase: "r32", subfase: "Ronda de 32", local: "2° Grupo A", visita: "2° Grupo B", fecha: "28 Jun", hora: "15:00", estadio: "Arrowhead · Kansas City" },
+  { id: 74, fase: "r32", subfase: "Ronda de 32", local: "1° Grupo E", visita: "Mejor 3ro", fecha: "29 Jun", hora: "16:30", estadio: "Hard Rock · Miami" },
+  { id: 75, fase: "r32", subfase: "Ronda de 32", local: "1° Grupo F", visita: "2° Grupo C", fecha: "29 Jun", hora: "21:00", estadio: "Akron · Guadalajara" },
+  { id: 76, fase: "r32", subfase: "Ronda de 32", local: "1° Grupo C", visita: "2° Grupo F", fecha: "29 Jun", hora: "13:00", estadio: "Lumen Field · Seattle" },
+  { id: 77, fase: "r32", subfase: "Ronda de 32", local: "1° Grupo I", visita: "Mejor 3ro", fecha: "30 Jun", hora: "17:00", estadio: "SoFi Stadium · Los Ángeles" },
+  { id: 78, fase: "r32", subfase: "Ronda de 32", local: "2° Grupo E", visita: "2° Grupo I", fecha: "30 Jun", hora: "13:00", estadio: "Levi's Stadium · San José" },
+  { id: 79, fase: "r32", subfase: "Ronda de 32", local: "1° Grupo A", visita: "Mejor 3ro", fecha: "30 Jun", hora: "21:00", estadio: "Azteca · Ciudad de México" },
+  { id: 80, fase: "r32", subfase: "Ronda de 32", local: "1° Grupo L", visita: "Mejor 3ro", fecha: "1 Jul", hora: "12:00", estadio: "BC Place · Vancouver" },
+  { id: 81, fase: "r32", subfase: "Ronda de 32", local: "1° Grupo D", visita: "Mejor 3ro", fecha: "1 Jul", hora: "20:00", estadio: "Gillette Stadium · Boston" },
+  { id: 82, fase: "r32", subfase: "Ronda de 32", local: "1° Grupo G", visita: "Mejor 3ro", fecha: "1 Jul", hora: "16:00", estadio: "Lincoln Financial · Philadelphia" },
+  { id: 83, fase: "r32", subfase: "Ronda de 32", local: "2° Grupo K", visita: "2° Grupo L", fecha: "2 Jul", hora: "19:00", estadio: "MetLife Stadium · Nueva York" },
+  { id: 84, fase: "r32", subfase: "Ronda de 32", local: "1° Grupo H", visita: "2° Grupo J", fecha: "2 Jul", hora: "15:00", estadio: "Arrowhead · Kansas City" },
+  { id: 85, fase: "r32", subfase: "Ronda de 32", local: "1° Grupo B", visita: "Mejor 3ro", fecha: "2 Jul", hora: "23:00", estadio: "AT&T Stadium · Dallas" },
+  { id: 86, fase: "r32", subfase: "Ronda de 32", local: "1° Grupo J", visita: "2° Grupo H", fecha: "3 Jul", hora: "18:00", estadio: "Mercedes-Benz · Atlanta" },
+  { id: 87, fase: "r32", subfase: "Ronda de 32", local: "1° Grupo K", visita: "Mejor 3ro", fecha: "3 Jul", hora: "21:30", estadio: "Rose Bowl · Los Ángeles" },
+  { id: 88, fase: "r32", subfase: "Ronda de 32", local: "2° Grupo D", visita: "2° Grupo G", fecha: "3 Jul", hora: "14:00", estadio: "Levi's Stadium · San José" },
+  { id: 89, fase: "r16", subfase: "Octavos de Final", local: "Gan. P74", visita: "Gan. P77", fecha: "4 Jul", hora: "17:00", estadio: "NRG Stadium · Houston" },
+  { id: 90, fase: "r16", subfase: "Octavos de Final", local: "Gan. P73", visita: "Gan. P75", fecha: "4 Jul", hora: "13:00", estadio: "Lumen Field · Seattle" },
+  { id: 91, fase: "r16", subfase: "Octavos de Final", local: "Gan. P76", visita: "Gan. P78", fecha: "5 Jul", hora: "16:00", estadio: "SoFi Stadium · Los Ángeles" },
+  { id: 92, fase: "r16", subfase: "Octavos de Final", local: "Gan. P79", visita: "Gan. P80", fecha: "5 Jul", hora: "20:00", estadio: "Azteca · Ciudad de México" },
+  { id: 93, fase: "r16", subfase: "Octavos de Final", local: "Gan. P83", visita: "Gan. P84", fecha: "6 Jul", hora: "15:00", estadio: "Levi's Stadium · San José" },
+  { id: 94, fase: "r16", subfase: "Octavos de Final", local: "Gan. P81", visita: "Gan. P82", fecha: "6 Jul", hora: "20:00", estadio: "Lincoln Financial · Philadelphia" },
+  { id: 95, fase: "r16", subfase: "Octavos de Final", local: "Gan. P86", visita: "Gan. P88", fecha: "7 Jul", hora: "12:00", estadio: "BC Place · Vancouver" },
+  { id: 96, fase: "r16", subfase: "Octavos de Final", local: "Gan. P85", visita: "Gan. P87", fecha: "7 Jul", hora: "16:00", estadio: "AT&T Stadium · Dallas" },
+  { id: 97, fase: "r8", subfase: "Cuartos de Final", local: "Gan. P89", visita: "Gan. P90", fecha: "9 Jul", hora: "16:00", estadio: "Hard Rock · Miami" },
+  { id: 98, fase: "r8", subfase: "Cuartos de Final", local: "Gan. P93", visita: "Gan. P94", fecha: "10 Jul", hora: "15:00", estadio: "Arrowhead · Kansas City" },
+  { id: 99, fase: "r8", subfase: "Cuartos de Final", local: "Gan. P91", visita: "Gan. P92", fecha: "11 Jul", hora: "17:00", estadio: "Mercedes-Benz · Atlanta" },
+  { id: 100, fase: "r8", subfase: "Cuartos de Final", local: "Gan. P95", visita: "Gan. P96", fecha: "11 Jul", hora: "21:00", estadio: "Rose Bowl · Los Ángeles" },
+  { id: 101, fase: "semi", subfase: "Semifinales", local: "Gan. P97", visita: "Gan. P98", fecha: "14 Jul", hora: "15:00", estadio: "Levi's Stadium · San José" },
+  { id: 102, fase: "semi", subfase: "Semifinales", local: "Gan. P99", visita: "Gan. P100", fecha: "15 Jul", hora: "15:00", estadio: "BC Place · Vancouver" },
+  { id: 103, fase: "3ro", subfase: "Tercer Puesto", local: "Sub. P101", visita: "Sub. P102", fecha: "18 Jul", hora: "17:00", estadio: "Mercedes-Benz · Atlanta" },
+  { id: 104, fase: "final", subfase: "Final", local: "Gan. P101", visita: "Gan. P102", fecha: "19 Jul", hora: "15:00", estadio: "SoFi Stadium · Los Ángeles" }
+]

@@ -1,6 +1,11 @@
 import { useState, useEffect } from "react"
 
-const ES_ELIMINATORIA = (fase) => ["r16","r8","r4","semi","final"].includes(fase)
+const ES_ELIMINATORIA = (fase) => ["r32","r16","r8","semi","3ro","final"].includes(fase)
+
+// Extract short name from "🇦🇷 Argentina" → "Argentina"
+function shortName(label) {
+  return label.replace(/^[\p{Emoji}\s]+/u, "").trim()
+}
 
 export default function FasePartidos({ fase, partidos, pronosticos, resultados, calcPts, onGuardar, guardando }) {
   const [local, setLocal] = useState({})
@@ -17,7 +22,6 @@ export default function FasePartidos({ fase, partidos, pronosticos, resultados, 
     setLocal(prev => {
       const cur = prev[pid] || { l: "", v: "", supl: "", pen: "" }
       const updated = { ...cur, [side]: val }
-      // Si cambia score y no es empate, limpiar supl/pen
       if (side === "l" || side === "v") {
         const l = side === "l" ? val : cur.l
         const v = side === "v" ? val : cur.v
@@ -26,7 +30,6 @@ export default function FasePartidos({ fase, partidos, pronosticos, resultados, 
           updated.pen = ""
         }
       }
-      // Si elige ganador en supl, limpiar pen (solo si no hay empate en supl)
       if (side === "supl" && val !== "empate") {
         updated.pen = ""
       }
@@ -67,7 +70,7 @@ export default function FasePartidos({ fase, partidos, pronosticos, resultados, 
                 <div key={p.id} className={`partido-row${resReal ? " jugado" : ""}`}>
                   {(p.fecha || p.estadio) && (
                     <div className="partido-meta">
-                      {p.fecha && <span className="meta-fecha">📅 {p.fecha}{p.hora ? ` · ${p.hora} ARG` : ""}</span>}
+                      {p.fecha && <span className="meta-fecha">📅 {p.fecha}{p.hora && p.hora !== "00:00" ? ` · ${p.hora} hs` : ""}</span>}
                       {p.estadio && <span className="meta-estadio">📍 {p.estadio}</span>}
                     </div>
                   )}
@@ -85,14 +88,13 @@ export default function FasePartidos({ fase, partidos, pronosticos, resultados, 
                   </div>
                   <div className="team visita">{p.visita}</div>
 
-                  {/* Suplementario — solo en eliminatorias con empate en 90 */}
                   {esElim && esEmpate90 && (
                     <div className="ganador-row">
                       <span className="ganador-label">⏱ Suplementario — ¿quién gana?</span>
                       <div className="ganador-btns">
                         <button className={`btn-ganador${pro.supl === "l" ? " active" : ""}`}
                           onClick={() => upd(p.id, "supl", pro.supl === "l" ? "" : "l")}>
-                          {p.local.split(" ").slice(1).join(" ")} 🏆
+                          {shortName(p.local)} 🏆
                         </button>
                         <button className={`btn-ganador btn-empate${pro.supl === "empate" ? " active" : ""}`}
                           onClick={() => upd(p.id, "supl", pro.supl === "empate" ? "" : "empate")}>
@@ -100,24 +102,23 @@ export default function FasePartidos({ fase, partidos, pronosticos, resultados, 
                         </button>
                         <button className={`btn-ganador${pro.supl === "v" ? " active" : ""}`}
                           onClick={() => upd(p.id, "supl", pro.supl === "v" ? "" : "v")}>
-                          🏆 {p.visita.split(" ").slice(1).join(" ")}
+                          🏆 {shortName(p.visita)}
                         </button>
                       </div>
                     </div>
                   )}
 
-                  {/* Penales — solo si hubo empate en suplementario */}
                   {esElim && esEmpate90 && hayEmpateSupl && (
                     <div className="ganador-row">
                       <span className="ganador-label">🎯 Penales — ¿quién gana?</span>
                       <div className="ganador-btns">
                         <button className={`btn-ganador${pro.pen === "l" ? " active" : ""}`}
                           onClick={() => upd(p.id, "pen", pro.pen === "l" ? "" : "l")}>
-                          {p.local.split(" ").slice(1).join(" ")} 🏆
+                          {shortName(p.local)} 🏆
                         </button>
                         <button className={`btn-ganador${pro.pen === "v" ? " active" : ""}`}
                           onClick={() => upd(p.id, "pen", pro.pen === "v" ? "" : "v")}>
-                          🏆 {p.visita.split(" ").slice(1).join(" ")}
+                          🏆 {shortName(p.visita)}
                         </button>
                       </div>
                     </div>
@@ -126,8 +127,8 @@ export default function FasePartidos({ fase, partidos, pronosticos, resultados, 
                   {resReal && (
                     <div className="res-real">
                       Real 90min: {resReal.l}-{resReal.v}
-                      {resReal.supl && resReal.supl !== "empate" && ` · Supl: ganó ${resReal.supl === "l" ? p.local : p.visita}`}
-                      {resReal.supl === "empate" && resReal.pen && ` · Pen: ganó ${resReal.pen === "l" ? p.local : p.visita}`}
+                      {resReal.supl && resReal.supl !== "empate" && ` · Supl: ganó ${resReal.supl === "l" ? shortName(p.local) : shortName(p.visita)}`}
+                      {resReal.supl === "empate" && resReal.pen && ` · Pen: ganó ${resReal.pen === "l" ? shortName(p.local) : shortName(p.visita)}`}
                     </div>
                   )}
                 </div>
