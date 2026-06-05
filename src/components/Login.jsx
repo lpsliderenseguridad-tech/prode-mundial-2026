@@ -1,34 +1,33 @@
+import { useState } from "react"
+
 export default function Login({ onLogin, loading }) {
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    const nombre = e.target.nombre.value.trim()
-    const empresa = e.target.empresa.value.trim()
-    if (!nombre || !empresa) return
-    onLogin(nombre, empresa)
+  const [nombre, setNombre] = useState("")
+  const [empresa, setEmpresa] = useState("")
+
+  const handleSubmit = () => {
+    if (!nombre.trim() || !empresa.trim()) { alert("Completá tu nombre y empresa"); return }
+    onLogin(nombre.trim(), empresa.trim())
   }
 
   return (
-    <div className="login-page">
+    <div className="login-wrap">
       <div className="login-card">
-        <div className="login-icon">⚽</div>
+        <img src="/logo.png" alt="LPS Seguridad" className="login-logo" />
         <h1 className="login-title">Prode Mundial 2026</h1>
-        <p className="login-sub">Un regalo de <strong>LPS Seguridad</strong> para vos 🎁</p>
-        <form onSubmit={handleSubmit} className="login-form">
-          <div className="field">
-            <label>Tu nombre</label>
-            <input name="nombre" type="text" placeholder="Ej: Juan Pérez" required autoFocus />
-          </div>
-          <div className="field">
-            <label>Empresa</label>
-            <input name="empresa" type="text" placeholder="Ej: Ferretería El Tornillo" required />
-          </div>
-          <button type="submit" className="btn-primary" disabled={loading}>
-            {loading ? "Cargando..." : "Entrar a jugar →"}
-          </button>
-        </form>
-        <p className="login-footer">
-          Si ya jugaste antes, ingresá el mismo nombre y empresa para recuperar tus pronósticos.
-        </p>
+        <p className="login-sub">Ingresá para cargar tus pronósticos</p>
+        <div className="field">
+          <label>Tu nombre</label>
+          <input type="text" value={nombre} onChange={e => setNombre(e.target.value)}
+            placeholder="Ej: Juan Pérez" onKeyDown={e => e.key === "Enter" && handleSubmit()} />
+        </div>
+        <div className="field">
+          <label>Tu empresa</label>
+          <input type="text" value={empresa} onChange={e => setEmpresa(e.target.value)}
+            placeholder="Ej: Mi Empresa SA" onKeyDown={e => e.key === "Enter" && handleSubmit()} />
+        </div>
+        <button className="btn-primary" onClick={handleSubmit} disabled={loading}>
+          {loading ? "Cargando..." : "¡Entrar al Prode! ⚽"}
+        </button>
       </div>
     </div>
   )

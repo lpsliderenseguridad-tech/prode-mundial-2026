@@ -457,3 +457,18 @@ body {
 }
 .btn-ganador:hover { border-color: var(--verde); color: var(--verde); }
 .btn-ganador.active { background: var(--verde); border-color: var(--verde); color: white; font-weight: 600; }
+
+/* Logo */
+.login-logo {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+  margin: 0 auto 12px;
+  display: block;
+}
+.header-logo-img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  border-radius: 50%;
+}

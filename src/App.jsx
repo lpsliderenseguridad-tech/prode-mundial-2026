@@ -109,8 +109,8 @@ export default function App() {
       <header className="header">
         <div className="header-inner">
           <div className="header-logo">
-            ⚽ <span>Prode Mundial 2026</span>
-            <span className="header-by">por <strong>LPS Seguridad</strong></span>
+            <img src="/logo.png" alt="LPS" className="header-logo-img" />
+            <span>Prode Mundial 2026</span>
           </div>
           <div className="header-user">
             <span className="user-name">{jugador.nombre}</span>
