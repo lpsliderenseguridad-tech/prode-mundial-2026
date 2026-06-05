@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 
-const ES_ELIMINATORIA = (fase) => [r16,r8,r4,semi,final].includes(fase)"
+const ES_ELIMINATORIA = (fase) => ["r16","r8","r4","semi","final"].includes(fase)
 
 export default function FasePartidos({ fase, partidos, pronosticos, resultados, calcPts, onGuardar, guardando }) {
   const [local, setLocal] = useState({})
