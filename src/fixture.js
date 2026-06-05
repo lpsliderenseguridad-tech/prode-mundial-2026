@@ -1,20 +1,17 @@
-// Fixture Mundial 2026 - 48 equipos, 12 grupos
-// Fase de grupos: 6 partidos por grupo (todos contra todos)
-// + 1ra fase (32) + 16avos + 8avos + Cuartos + Semis + Final
-
+// Fixture oficial Mundial 2026 - Grupos confirmados post-repechajes
 export const GRUPOS = {
-  A: ["🇺🇸 EE.UU.", "🇲🇽 México", "🇨🇦 Canadá", "🇺🇾 Uruguay"],
-  B: ["🇦🇷 Argentina", "🇲🇦 Marruecos", "🇮🇶 Iraq", "🇸🇰 Eslovaquia"],
-  C: ["🇧🇷 Brasil", "🇯🇵 Japón", "🇨🇷 Costa Rica", "🇩🇿 Argelia"],
-  D: ["🇫🇷 Francia", "🇵🇹 Portugal", "🇭🇷 Croacia", "🇦🇺 Australia"],
-  E: ["🇪🇸 España", "🇩🇪 Alemania", "🇧🇪 Bélgica", "🇰🇿 Kazajistán"],
-  F: ["🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra", "🇳🇱 Países Bajos", "🇿🇦 Sudáfrica", "🇸🇮 Eslovenia"],
-  G: ["🇸🇳 Senegal", "🇷🇸 Serbia", "🇳🇿 Nueva Zelanda", "🇺🇿 Uzbekistán"],
-  H: ["🇵🇱 Polonia", "🇨🇱 Chile", "🇰🇪 Kenia", "🇸🇦 Arabia Saudita"],
-  I: ["🇰🇷 Corea del Sur", "🇨🇲 Camerún", "🇭🇳 Honduras", "🇨🇮 Costa Marfil"],
-  J: ["🇨🇴 Colombia", "🇹🇳 Túnez", "🇨🇭 Suiza", "🇩🇰 Dinamarca"],
-  K: ["🇺🇦 Ucrania", "🇵🇦 Panamá", "🇬🇭 Ghana", "🇹🇷 Turquía"],
-  L: ["🇲🇽 México", "🇸🇻 El Salvador", "🇦🇴 Angola", "🇵🇾 Paraguay"],
+  A: ["🇲🇽 México", "🇿🇦 Sudáfrica", "🇰🇷 Corea del Sur", "🇨🇿 R. Checa"],
+  B: ["🇨🇦 Canadá", "🇧🇦 Bosnia-Herzegovina", "🇶🇦 Qatar", "🇨🇭 Suiza"],
+  C: ["🇧🇷 Brasil", "🇲🇦 Marruecos", "🇭🇹 Haití", "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escocia"],
+  D: ["🇺🇸 EE.UU.", "🇵🇾 Paraguay", "🇦🇺 Australia", "🇹🇷 Turquía"],
+  E: ["🇩🇪 Alemania", "🇨🇼 Curazao", "🇨🇮 Costa de Marfil", "🇪🇨 Ecuador"],
+  F: ["🇳🇱 Países Bajos", "🇯🇵 Japón", "🇸🇪 Suecia", "🇹🇳 Túnez"],
+  G: ["🇧🇪 Bélgica", "🇪🇬 Egipto", "🇮🇷 Irán", "🇳🇿 Nueva Zelanda"],
+  H: ["🇪🇸 España", "🇨🇻 Cabo Verde", "🇸🇦 Arabia Saudí", "🇺🇾 Uruguay"],
+  I: ["🇫🇷 Francia", "🇸🇳 Senegal", "🇮🇶 Irak", "🇳🇴 Noruega"],
+  J: ["🇦🇷 Argentina", "🇩🇿 Argelia", "🇦🇹 Austria", "🇯🇴 Jordania"],
+  K: ["🇵🇹 Portugal", "🇨🇩 RD Congo", "🇺🇿 Uzbekistán", "🇨🇴 Colombia"],
+  L: ["🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra", "🇭🇷 Croacia", "🇬🇭 Ghana", "🇵🇦 Panamá"],
 };
 
 function generarPartidos() {
@@ -40,7 +37,7 @@ function generarPartidos() {
     });
   });
 
-  // 1ra Fase eliminatoria (32 → 16)
+  // 1ra Fase eliminatoria (32 → 16 partidos)
   const siglasGrupos = Object.keys(GRUPOS);
   for (let i = 0; i < siglasGrupos.length; i++) {
     const g = siglasGrupos[i];
@@ -53,7 +50,6 @@ function generarPartidos() {
       visita: `2° Grupo ${gSig}`,
     });
   }
-  // 4 mejores 3eros completan los 16 partidos
   for (let i = 1; i <= 4; i++) {
     partidos.push({
       id: pid++,
