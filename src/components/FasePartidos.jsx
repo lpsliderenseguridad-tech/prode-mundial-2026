@@ -38,6 +38,12 @@ export default function FasePartidos({ fase, partidos, pronosticos, resultados, 
               const resReal = resultados[p.id]
               return (
                 <div key={p.id} className={`partido-row${resReal ? " jugado" : ""}`}>
+                  {(p.fecha || p.estadio) && (
+                    <div className="partido-meta">
+                      {p.fecha && <span className="meta-fecha">📅 {p.fecha}{p.hora ? ` · ${p.hora} ARG` : ""}</span>}
+                      {p.estadio && <span className="meta-estadio">📍 {p.estadio}</span>}
+                    </div>
+                  )}
                   <div className="team local">{p.local}</div>
                   <div className="score-center">
                     <input
