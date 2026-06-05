@@ -54,6 +54,29 @@ body {
   align-items: center;
   gap: 6px;
 }
+.header-by {
+  font-size: 11px;
+  font-weight: 400;
+  opacity: .7;
+  letter-spacing: 0;
+  font-family: 'Barlow', sans-serif;
+}
+.header-by strong { color: var(--gold); font-weight: 700; }
+.lps-footer {
+  background: var(--verde-dark);
+  color: rgba(255,255,255,.7);
+  text-align: center;
+  padding: .6rem 1rem;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.lps-footer strong { color: var(--gold); }
+.lps-footer a { color: rgba(255,255,255,.8); text-decoration: none; }
+.lps-footer a:hover { color: white; }
 .header-user {
   display: flex;
   align-items: center;

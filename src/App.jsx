@@ -84,7 +84,10 @@ export default function App() {
       {/* Header */}
       <header className="header">
         <div className="header-inner">
-          <div className="header-logo">⚽ <span>Prode Mundial 2026</span></div>
+          <div className="header-logo">
+            ⚽ <span>Prode Mundial 2026</span>
+            <span className="header-by">por <strong>LPS Seguridad</strong></span>
+          </div>
           <div className="header-user">
             <span className="user-name">{jugador.nombre}</span>
             <span className="user-empresa">{jugador.empresa}</span>
@@ -142,6 +145,14 @@ export default function App() {
           />
         )}
       </main>
+      <footer className="lps-footer">
+        <span>⚽ Prode organizado por</span>
+        <strong>🔥 LPS Seguridad</strong>
+        <span>·</span>
+        <a href="https://wa.me/5493584602508" target="_blank" rel="noreferrer">📲 3584602508</a>
+        <span>·</span>
+        <a href="https://lpsseguridad.com.ar" target="_blank" rel="noreferrer">lpsseguridad.com.ar</a>
+      </footer>
     </div>
   )
 }

@@ -12,7 +12,7 @@ export default function Login({ onLogin, loading }) {
       <div className="login-card">
         <div className="login-icon">⚽</div>
         <h1 className="login-title">Prode Mundial 2026</h1>
-        <p className="login-sub">Ingresá tus datos para cargar tus pronósticos y competir</p>
+        <p className="login-sub">Un regalo de <strong>LPS Seguridad</strong> para vos 🎁</p>
         <form onSubmit={handleSubmit} className="login-form">
           <div className="field">
             <label>Tu nombre</label>
