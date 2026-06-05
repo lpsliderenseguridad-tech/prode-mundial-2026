@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback } from "react"
-import { PARTIDOS, FASES } from "./fixture"
-import {
+import { PARTIDOS, FASES } from "./fixture"import {
   upsertJugador, getPronosticos, guardarFase,
   getAllJugadores, getResultados, upsertResultado, recalcularPuntos
 } from "./supabase"
@@ -47,7 +46,7 @@ export default function App() {
 
     const { data: pros } = await getPronosticos(data.id)
     const map = {}
-    if (pros) pros.forEach(p => { map[p.partido_id] = { l: p.goles_local ?? "", v: p.goles_visita ?? "" } })
+    if (pros) pros.forEach(p => { map[p.partido_id] = { l: p.goles_local ?? "", v: p.goles_visita ?? "", supl: p.ganador_supl || "", pen: p.ganador_pen || "" } })
     setPronosticos(map)
     setJugador(data)
     setLoading(false)
@@ -69,10 +68,46 @@ export default function App() {
   const calcPts = (pid, pro) => {
     const r = resultados[pid]
     if (!r || pro.l === "" || pro.v === "") return 0
-    if (+pro.l === r.l && +pro.v === r.v) return 3
-    const rs = r.l > r.v ? 1 : r.l < r.v ? -1 : 0
-    const ps = +pro.l > +pro.v ? 1 : +pro.l < +pro.v ? -1 : 0
-    return rs === ps ? 1 : 0
+    const fase = PARTIDOS.find(p => p.id === pid)?.fase
+    const esElim = fase && fase !== "grupos"
+
+    const esEmpate90Real = r.l === r.v
+    const esEmpate90Pro = parseInt(pro.l) === parseInt(pro.v)
+    const exacto90 = parseInt(pro.l) === r.l && parseInt(pro.v) === r.v
+
+    if (!esElim) {
+      // GRUPOS: exacto=3, ganador/empate correcto=1
+      if (exacto90) return 3
+      const rs = r.l > r.v ? 1 : r.l < r.v ? -1 : 0
+      const ps = parseInt(pro.l) > parseInt(pro.v) ? 1 : parseInt(pro.l) < parseInt(pro.v) ? -1 : 0
+      return rs === ps ? 1 : 0
+    }
+
+    // ELIMINATORIAS
+    let pts = 0
+
+    // Puntaje 90 min
+    if (exacto90) {
+      pts += 4 // exacto = 4 (3 ganador + 1 bonus)
+    } else if (esEmpate90Real && esEmpate90Pro) {
+      pts += 1 // empate correcto = 1
+    } else {
+      const rsGan = r.l > r.v ? "l" : r.l < r.v ? "v" : null
+      const psGan = parseInt(pro.l) > parseInt(pro.v) ? "l" : parseInt(pro.l) < parseInt(pro.v) ? "v" : null
+      if (rsGan && psGan && rsGan === psGan) pts += 3 // ganador correcto = 3
+    }
+
+    // Puntaje suplementario (solo si hubo empate en 90)
+    if (esEmpate90Real && r.supl && pro.supl) {
+      if (pro.supl === r.supl) pts += 1
+    }
+
+    // Puntaje penales (solo si hubo empate en supl)
+    if (esEmpate90Real && r.supl === "empate" && r.pen && pro.pen) {
+      if (pro.pen === r.pen) pts += 1
+    }
+
+    return pts
   }
 
   const totalPuntos = PARTIDOS.reduce((acc, p) => acc + calcPts(p.id, pronosticos[p.id] || { l: "", v: "" }), 0)

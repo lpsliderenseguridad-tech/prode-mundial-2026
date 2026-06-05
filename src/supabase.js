@@ -59,7 +59,6 @@ export async function upsertPronostico(jugadorId, partidoId, golesLocal, golesVi
 }
 
 export async function guardarFase(jugadorId, pronosticosMap) {
-  // pronosticosMap = { partidoId: { l, v }, ... }
   const rows = Object.entries(pronosticosMap)
     .filter(([, v]) => v.l !== '' && v.v !== '')
     .map(([pid, v]) => ({
@@ -67,6 +66,8 @@ export async function guardarFase(jugadorId, pronosticosMap) {
       partido_id: parseInt(pid),
       goles_local: parseInt(v.l),
       goles_visita: parseInt(v.v),
+      ganador_supl: v.supl || null,
+      ganador_pen: v.pen || null,
     }))
 
   if (rows.length === 0) return { error: null }
