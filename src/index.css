@@ -279,6 +279,25 @@ body {
   border-radius: 4px;
   padding: 2px 6px;
 }
+.partido-meta {
+  grid-column: 1/-1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 3px;
+}
+.meta-fecha {
+  font-size: 10px;
+  color: var(--gold);
+  font-weight: 600;
+  background: #2a1f00;
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+.meta-estadio {
+  font-size: 10px;
+  color: var(--text-light);
+}
 
 /* ── Guardar ── */
 .guardar-wrap { margin-top: 1rem; }
