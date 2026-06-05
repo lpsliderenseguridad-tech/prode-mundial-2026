@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react"
-import { PARTIDOS, FASES } from "./fixture"import {
+import { PARTIDOS, FASES } from "./fixture"
   upsertJugador, getPronosticos, guardarFase,
   getAllJugadores, getResultados, upsertResultado, recalcularPuntos
 } from "./supabase"
