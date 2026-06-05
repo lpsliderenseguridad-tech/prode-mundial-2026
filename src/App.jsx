@@ -69,7 +69,7 @@ export default function App() {
     const r = resultados[pid]
     if (!r || pro.l === "" || pro.v === "") return 0
     const fase = PARTIDOS.find(p => p.id === pid)?.fase
-    const esElim = fase && fase !== "grupos"
+    const esElim = fase && ["r16","r8","r4","semi","final"].includes(fase)
 
     const esEmpate90Real = r.l === r.v
     const esEmpate90Pro = parseInt(pro.l) === parseInt(pro.v)
