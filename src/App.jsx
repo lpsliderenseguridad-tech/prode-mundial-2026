@@ -9,6 +9,7 @@ import FasePartidos from "./components/FasePartidos"
 import RankingGeneral from "./components/RankingGeneral"
 import RankingEmpresas from "./components/RankingEmpresas"
 import AdminPanel from "./components/AdminPanel"
+import Figurita from "./components/Figurita"
 
 const ADMIN_PASS = import.meta.env.VITE_ADMIN_PASS || "lps2026"
 const ES_ELIMINATORIA = (fase) => ["r32","r16","r8","semi","3ro","final"].includes(fase)
@@ -23,6 +24,7 @@ export default function App() {
   const [loading, setLoading] = useState(false)
   const [guardando, setGuardando] = useState(false)
   const [isAdmin, setIsAdmin] = useState(false)
+  const [verFigurita, setVerFigurita] = useState(false)
 
   const cargarGlobales = useCallback(async () => {
     const [{ data: resList }, { data: jugList }] = await Promise.all([
@@ -116,6 +118,7 @@ export default function App() {
             <span className="user-name">{jugador.nombre}</span>
             <span className="user-empresa">{jugador.empresa}</span>
             <span className="pts-badge">{totalPuntos} pts</span>
+            <button className="btn-figurita" onClick={() => setVerFigurita(true)}>⭐ Mi figurita</button>
           </div>
         </div>
         <nav className="main-nav">
@@ -169,6 +172,7 @@ export default function App() {
         )}
       </main>
 
+      {verFigurita && <Figurita jugador={jugador} puntos={totalPuntos} onCerrar={() => setVerFigurita(false)} />}
       <footer className="lps-footer">
         <span>⚽ Prode organizado por</span>
         <strong>🔥 LPS Seguridad</strong>
