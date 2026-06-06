@@ -7,11 +7,24 @@ export const supabase = createClient(URL, KEY)
 
 export async function upsertJugador(nombre, empresa, fotoUrl = null) {
   const key = `${nombre.toLowerCase().trim()}_${empresa.toLowerCase().trim()}`
-  const { data, error } = await supabase
-    .from("prode_jugadores")
-    .upsert({ nombre, empresa, clave: key, foto_url: fotoUrl }, { onConflict: "clave" })
-    .select().single()
-  return { data, error }
+  // First try to find existing
+  const { data: existing } = await supabase
+    .from("prode_jugadores").select("*").eq("clave", key).single()
+  
+  if (existing) {
+    // Update foto_url if provided
+    const updates = { nombre, empresa }
+    if (fotoUrl) updates.foto_url = fotoUrl
+    const { data, error } = await supabase
+      .from("prode_jugadores").update(updates).eq("clave", key).select().single()
+    return { data, error }
+  } else {
+    const { data, error } = await supabase
+      .from("prode_jugadores")
+      .insert({ nombre, empresa, clave: key, foto_url: fotoUrl, puntos: 0 })
+      .select().single()
+    return { data, error }
+  }
 }
 
 export async function subirFoto(file, nombre, empresa) {
