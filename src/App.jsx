@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from "react"
 import { PARTIDOS, FASES } from "./fixture"
 import {
   upsertJugador, getPronosticos, guardarFase,
-  getAllJugadores, getResultados, upsertResultado, recalcularPuntos
+  getAllJugadores, getResultados, upsertResultado, recalcularPuntos, subirFoto
 } from "./supabase"
 import Login from "./components/Login"
 import FasePartidos from "./components/FasePartidos"
@@ -41,9 +41,16 @@ export default function App() {
 
   useEffect(() => { cargarGlobales() }, [cargarGlobales])
 
-  const handleLogin = async (nombre, empresa) => {
+  const handleLogin = async (nombre, empresa, foto) => {
     setLoading(true)
-    const { data, error } = await upsertJugador(nombre, empresa)
+    console.log("foto recibida:", foto)
+    let fotoUrl = null
+    if (foto) {
+      console.log("subiendo foto...")
+      fotoUrl = await subirFoto(foto, nombre, empresa)
+      console.log("fotoUrl resultado:", fotoUrl)
+    }
+    const { data, error } = await upsertJugador(nombre, empresa, fotoUrl)
     if (error || !data) { alert("Error al registrarse. Intentá de nuevo."); setLoading(false); return }
     const { data: pros } = await getPronosticos(data.id)
     const map = {}
