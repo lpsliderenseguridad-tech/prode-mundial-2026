@@ -9,7 +9,7 @@ export async function upsertJugador(nombre, empresa, fotoUrl = null) {
   const key = `${nombre.toLowerCase().trim()}_${empresa.toLowerCase().trim()}`
   // First try to find existing
   const { data: existing } = await supabase
-    .from("prode_jugadores").select("*").eq("clave", key).single()
+    .from("prode_jugadores").select("*").eq("clave", key).maybeSingle()
   
   if (existing) {
     // Update foto_url if provided
