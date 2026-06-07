@@ -52,6 +52,7 @@ export default function App() {
     }
     const { data, error } = await upsertJugador(nombre, empresa, fotoUrl)
     if (error || !data) { alert("Error al registrarse. Intentá de nuevo."); setLoading(false); return }
+    if (fotoUrl && !data.foto_url) data.foto_url = fotoUrl
     const { data: pros } = await getPronosticos(data.id)
     const map = {}
     if (pros) pros.forEach(p => { map[p.partido_id] = { l: p.goles_local ?? "", v: p.goles_visita ?? "", supl: p.ganador_supl || "", pen: p.ganador_pen || "" } })
