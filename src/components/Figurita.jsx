@@ -1,15 +1,21 @@
 import { useRef, useEffect, useState } from "react"
 
-const COLORES = [
-  ["#1a237e","#ffb300"], ["#b71c1c","#e53935"], ["#1b5e20","#43a047"],
-  ["#4a148c","#9c27b0"], ["#006064","#00bcd4"], ["#bf360c","#ff5722"],
-  ["#263238","#607d8b"], ["#880e4f","#e91e63"],
+// Paletas por empresa (igual que antes)
+const PALETAS = [
+  { bg: "#74C0FC", dark: "#1864AB", accent: "#fff" },   // celeste Argentina
+  { bg: "#F03E3E", dark: "#C92A2A", accent: "#FFD700" }, // rojo
+  { bg: "#2F9E44", dark: "#1B5E20", accent: "#fff" },   // verde Brasil
+  { bg: "#F59F00", dark: "#8B5E00", accent: "#1a1a1a" }, // amarillo
+  { bg: "#7950F2", dark: "#4C2FBF", accent: "#fff" },   // violeta
+  { bg: "#1098AD", dark: "#0A6070", accent: "#fff" },   // cyan
+  { bg: "#E8590C", dark: "#8B3000", accent: "#fff" },   // naranja
+  { bg: "#212529", dark: "#000", accent: "#FFD700" },   // negro dorado
 ]
 
-function getColor(empresa) {
+function getPaleta(empresa) {
   let n = 0
-  for (let i = 0; i < empresa.length; i++) n += empresa.charCodeAt(i)
-  return COLORES[n % COLORES.length]
+  for (let c of empresa) n += c.charCodeAt(0)
+  return PALETAS[n % PALETAS.length]
 }
 
 function getNum(nombre, empresa) {
@@ -21,12 +27,10 @@ function getNum(nombre, empresa) {
 export default function Figurita({ jugador, puntos, onCerrar }) {
   const ref = useRef()
   const [descargando, setDescargando] = useState(false)
-  const [bg, accent] = getColor(jugador.empresa)
+  const paleta = getPaleta(jugador.empresa)
   const num = getNum(jugador.nombre, jugador.empresa)
   const iniciales = jugador.nombre.split(" ").map(p => p[0]).join("").toUpperCase().slice(0,2)
-  console.log("jugador en figurita:", jugador)
   const tieneFoto = jugador.foto_url && jugador.foto_url.length > 0
-  console.log("tieneFoto:", tieneFoto, jugador.foto_url)
 
   useEffect(() => {
     if (!window.html2canvas) {
@@ -46,62 +50,95 @@ export default function Figurita({ jugador, puntos, onCerrar }) {
       }
       if (!window.html2canvas) { alert("Error. Intentá de nuevo."); setDescargando(false); return }
       const canvas = await window.html2canvas(ref.current, {
-        scale: 3, useCORS: true, allowTaint: true,
-        backgroundColor: null, logging: false
+        scale: 3, useCORS: true, allowTaint: true, backgroundColor: null, logging: false
       })
       const link = document.createElement("a")
       link.download = `figurita-${jugador.nombre.replace(/ /g,"-")}.png`
       link.href = canvas.toDataURL("image/png")
       link.click()
-    } catch(e) {
-      alert("Error al descargar. Intentá de nuevo.")
-    }
+    } catch(e) { alert("Error al descargar.") }
     setDescargando(false)
   }
+
+  const apellido = jugador.nombre.split(" ").slice(-1)[0]?.toUpperCase() || jugador.nombre.toUpperCase()
+  const primerNombre = jugador.nombre.split(" ")[0] || ""
 
   return (
     <div className="figurita-overlay" onClick={onCerrar}>
       <div className="figurita-modal" onClick={e => e.stopPropagation()}>
 
-        <div className="figurita-card panini" ref={ref} style={{"--bg": bg, "--accent": accent}}>
-          {/* Fondo con degradé */}
-          <div className="panini-bg" />
+        {/* CARTA PANINI */}
+        <div className="pan-card" ref={ref} style={{
+          "--bg": paleta.bg,
+          "--dark": paleta.dark,
+          "--acc": paleta.accent,
+        }}>
+          {/* Fondo degradé */}
+          <div className="pan-fondo" />
 
-          {/* Foto o Avatar — ocupa 65% de la carta */}
-          <div className="panini-foto-wrap">
-            {tieneFoto
-              ? <img src={jugador.foto_url} alt={jugador.nombre} className="panini-foto" crossOrigin="anonymous" />
-              : <div className="panini-avatar-fallback" style={{background: accent, color: bg}}>
-                  {iniciales}
-                </div>
-            }
-            {/* Número grande superpuesto */}
-            <div className="panini-num">#{num}</div>
-          </div>
-
-          {/* Franja inferior con datos */}
-          <div className="panini-info" style={{background: bg}}>
-            <div className="panini-nombre">{jugador.nombre.toUpperCase()}</div>
-            <div className="panini-empresa" style={{color: accent}}>{jugador.empresa}</div>
-            <div className="panini-stats-row">
-              <div className="panini-stat">
-                <span className="panini-stat-val" style={{color: accent}}>{puntos}</span>
-                <span className="panini-stat-lbl">PUNTOS</span>
-              </div>
-              <div className="panini-stat-sep" />
-              <div className="panini-stat">
-                <span className="panini-stat-val" style={{color: accent}}>⚽</span>
-                <span className="panini-stat-lbl">MUNDIAL 2026</span>
-              </div>
+          {/* Header — número + logos */}
+          <div className="pan-top">
+            <div className="pan-num">{num}</div>
+            <div className="pan-logos">
+              <img src="/logo.png" alt="LPS" className="pan-logo-lps" crossOrigin="anonymous" />
+              <div className="pan-badge-fifa">⚽</div>
             </div>
           </div>
 
-          {/* Logo LPS + PANINI style badge */}
-          <div className="panini-corner-logo">
-            <img src="/logo.png" alt="LPS" crossOrigin="anonymous" />
+          {/* Foto principal */}
+          <div className="pan-foto-area">
+            {tieneFoto
+              ? <img src={jugador.foto_url} alt={jugador.nombre} className="pan-foto" crossOrigin="anonymous" />
+              : <div className="pan-avatar" style={{background: paleta.dark, color: paleta.bg}}>
+                  {iniciales}
+                </div>
+            }
+            {/* Gradiente sobre la foto */}
+            <div className="pan-foto-overlay" />
           </div>
-          <div className="panini-corner-badge" style={{background: accent, color: bg}}>
-            LPS
+
+          {/* Info inferior */}
+          <div className="pan-info" style={{background: paleta.dark}}>
+            {/* Nombre grande */}
+            <div className="pan-apellido" style={{color: paleta.accent}}>{apellido}</div>
+            <div className="pan-primer-nombre">{primerNombre}</div>
+
+            {/* Stats row */}
+            <div className="pan-stats">
+              {jugador.fecha_nac && (
+                <div className="pan-stat-item">
+                  <span className="pan-stat-label">NACIMIENTO</span>
+                  <span className="pan-stat-val">{jugador.fecha_nac}</span>
+                </div>
+              )}
+              {jugador.estatura && (
+                <div className="pan-stat-item">
+                  <span className="pan-stat-label">ESTATURA</span>
+                  <span className="pan-stat-val">{jugador.estatura}</span>
+                </div>
+              )}
+              {jugador.peso && (
+                <div className="pan-stat-item">
+                  <span className="pan-stat-label">PESO</span>
+                  <span className="pan-stat-val">{jugador.peso}</span>
+                </div>
+              )}
+              <div className="pan-stat-item">
+                <span className="pan-stat-label">PUNTOS</span>
+                <span className="pan-stat-val" style={{color: paleta.bg === "#74C0FC" ? "#FFD700" : paleta.bg}}>{puntos}</span>
+              </div>
+            </div>
+
+            {/* Club */}
+            <div className="pan-club">
+              {jugador.club ? `🏟️ ${jugador.club}` : `🏢 ${jugador.empresa}`}
+            </div>
+
+            {/* Footer */}
+            <div className="pan-footer">
+              <span>PRODE MUNDIAL 2026</span>
+              <span>LPS SEGURIDAD</span>
+            </div>
           </div>
         </div>
 

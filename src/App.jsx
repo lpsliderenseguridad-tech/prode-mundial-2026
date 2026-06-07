@@ -41,7 +41,7 @@ export default function App() {
 
   useEffect(() => { cargarGlobales() }, [cargarGlobales])
 
-  const handleLogin = async (nombre, empresa, foto) => {
+  const handleLogin = async (nombre, empresa, foto, extras = {}) => {
     setLoading(true)
     console.log("foto recibida:", foto)
     let fotoUrl = null
@@ -50,7 +50,7 @@ export default function App() {
       fotoUrl = await subirFoto(foto, nombre, empresa)
       console.log("fotoUrl resultado:", fotoUrl)
     }
-    const { data, error } = await upsertJugador(nombre, empresa, fotoUrl)
+    const { data, error } = await upsertJugador(nombre, empresa, fotoUrl, extras)
     if (error || !data) { alert("Error al registrarse. Intentá de nuevo."); setLoading(false); return }
     if (fotoUrl && !data.foto_url) data.foto_url = fotoUrl
     const { data: pros } = await getPronosticos(data.id)

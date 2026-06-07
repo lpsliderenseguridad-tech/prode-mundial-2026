@@ -5,15 +5,13 @@ const KEY = import.meta.env.VITE_SUPABASE_ANON_KEY
 
 export const supabase = createClient(URL, KEY)
 
-export async function upsertJugador(nombre, empresa, fotoUrl = null) {
+export async function upsertJugador(nombre, empresa, fotoUrl = null, extras = {}) {
   const key = `${nombre.toLowerCase().trim()}_${empresa.toLowerCase().trim()}`
-  // First try to find existing
   const { data: existing } = await supabase
     .from("prode_jugadores").select("*").eq("clave", key).maybeSingle()
   
   if (existing) {
-    // Update foto_url if provided
-    const updates = { nombre, empresa }
+    const updates = { nombre, empresa, ...extras }
     if (fotoUrl) updates.foto_url = fotoUrl
     const { data, error } = await supabase
       .from("prode_jugadores").update(updates).eq("clave", key).select().single()
@@ -21,7 +19,7 @@ export async function upsertJugador(nombre, empresa, fotoUrl = null) {
   } else {
     const { data, error } = await supabase
       .from("prode_jugadores")
-      .insert({ nombre, empresa, clave: key, foto_url: fotoUrl, puntos: 0 })
+      .insert({ nombre, empresa, clave: key, foto_url: fotoUrl, puntos: 0, ...extras })
       .select().single()
     return { data, error }
   }
