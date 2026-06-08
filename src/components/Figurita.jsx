@@ -1,15 +1,14 @@
 import { useRef, useEffect, useState } from "react"
 
-// Paletas por empresa (igual que antes)
 const PALETAS = [
-  { bg: "#74C0FC", dark: "#1864AB", accent: "#fff" },   // celeste Argentina
-  { bg: "#F03E3E", dark: "#C92A2A", accent: "#FFD700" }, // rojo
-  { bg: "#2F9E44", dark: "#1B5E20", accent: "#fff" },   // verde Brasil
-  { bg: "#F59F00", dark: "#8B5E00", accent: "#1a1a1a" }, // amarillo
-  { bg: "#7950F2", dark: "#4C2FBF", accent: "#fff" },   // violeta
-  { bg: "#1098AD", dark: "#0A6070", accent: "#fff" },   // cyan
-  { bg: "#E8590C", dark: "#8B3000", accent: "#fff" },   // naranja
-  { bg: "#212529", dark: "#000", accent: "#FFD700" },   // negro dorado
+  { bg: "#74C0FC", dark: "#1864AB", text: "#fff", num_color: "rgba(255,255,255,0.15)" },
+  { bg: "#F03E3E", dark: "#C92A2A", text: "#fff", num_color: "rgba(255,255,255,0.15)" },
+  { bg: "#2F9E44", dark: "#1B5E20", text: "#fff", num_color: "rgba(255,255,255,0.15)" },
+  { bg: "#F59F00", dark: "#8B5E00", text: "#fff", num_color: "rgba(255,255,255,0.15)" },
+  { bg: "#7950F2", dark: "#4C2FBF", text: "#fff", num_color: "rgba(255,255,255,0.15)" },
+  { bg: "#1098AD", dark: "#0A6070", text: "#fff", num_color: "rgba(255,255,255,0.15)" },
+  { bg: "#E8590C", dark: "#8B3000", text: "#fff", num_color: "rgba(255,255,255,0.15)" },
+  { bg: "#212529", dark: "#000", text: "#FFD700", num_color: "rgba(255,215,0,0.12)" },
 ]
 
 function getPaleta(empresa) {
@@ -28,9 +27,11 @@ export default function Figurita({ jugador, puntos, onCerrar }) {
   const ref = useRef()
   const [descargando, setDescargando] = useState(false)
   const paleta = getPaleta(jugador.empresa)
-  const num = getNum(jugador.nombre, jugador.empresa)
+  const numFig = getNum(jugador.nombre, jugador.empresa)
   const iniciales = jugador.nombre.split(" ").map(p => p[0]).join("").toUpperCase().slice(0,2)
   const tieneFoto = jugador.foto_url && jugador.foto_url.length > 0
+  const apellido = jugador.nombre.split(" ").slice(-1)[0]?.toUpperCase() || jugador.nombre.toUpperCase()
+  const primerNombre = jugador.nombre.split(" ").slice(0,-1).join(" ") || ""
 
   useEffect(() => {
     if (!window.html2canvas) {
@@ -60,84 +61,76 @@ export default function Figurita({ jugador, puntos, onCerrar }) {
     setDescargando(false)
   }
 
-  const apellido = jugador.nombre.split(" ").slice(-1)[0]?.toUpperCase() || jugador.nombre.toUpperCase()
-  const primerNombre = jugador.nombre.split(" ")[0] || ""
-
   return (
     <div className="figurita-overlay" onClick={onCerrar}>
       <div className="figurita-modal" onClick={e => e.stopPropagation()}>
 
-        {/* CARTA PANINI */}
-        <div className="pan-card" ref={ref} style={{
+        <div className="p26-card" ref={ref} style={{
           "--bg": paleta.bg,
           "--dark": paleta.dark,
-          "--acc": paleta.accent,
+          "--text": paleta.text,
+          "--numcol": paleta.num_color,
         }}>
-          {/* Fondo degradé */}
-          <div className="pan-fondo" />
+          {/* ===== ZONA SUPERIOR — FOTO ===== */}
+          <div className="p26-foto-zona">
 
-          {/* Header — número + logos */}
-          <div className="pan-top">
-            <div className="pan-num">{num}</div>
-            <div className="pan-logos">
-              <img src="/logo.png" alt="LPS" className="pan-logo-lps" crossOrigin="anonymous" />
-              <div className="pan-badge-fifa">⚽</div>
-            </div>
-          </div>
+            {/* Fondo degradé */}
+            <div className="p26-fondo-grad" />
 
-          {/* Foto principal */}
-          <div className="pan-foto-area">
-            {tieneFoto
-              ? <img src={jugador.foto_url} alt={jugador.nombre} className="pan-foto" crossOrigin="anonymous" />
-              : <div className="pan-avatar" style={{background: paleta.dark, color: paleta.bg}}>
-                  {iniciales}
-                </div>
-            }
-            {/* Gradiente sobre la foto */}
-            <div className="pan-foto-overlay" />
-          </div>
+            {/* "26" gigante semitransparente */}
+            <div className="p26-big-num">26</div>
 
-          {/* Info inferior */}
-          <div className="pan-info" style={{background: paleta.dark}}>
-            {/* Nombre grande */}
-            <div className="pan-apellido" style={{color: paleta.accent}}>{apellido}</div>
-            <div className="pan-primer-nombre">{primerNombre}</div>
+            {/* Número de figurita — esquina sup izq */}
+            <div className="p26-fig-num">{numFig}</div>
 
-            {/* Stats row */}
-            <div className="pan-stats">
-              {jugador.fecha_nac && (
-                <div className="pan-stat-item">
-                  <span className="pan-stat-label">NACIMIENTO</span>
-                  <span className="pan-stat-val">{jugador.fecha_nac}</span>
-                </div>
-              )}
-              {jugador.estatura && (
-                <div className="pan-stat-item">
-                  <span className="pan-stat-label">ESTATURA</span>
-                  <span className="pan-stat-val">{jugador.estatura}</span>
-                </div>
-              )}
-              {jugador.peso && (
-                <div className="pan-stat-item">
-                  <span className="pan-stat-label">PESO</span>
-                  <span className="pan-stat-val">{jugador.peso}</span>
-                </div>
-              )}
-              <div className="pan-stat-item">
-                <span className="pan-stat-label">PUNTOS</span>
-                <span className="pan-stat-val" style={{color: paleta.bg === "#74C0FC" ? "#FFD700" : paleta.bg}}>{puntos}</span>
+            {/* Logos arriba derecha */}
+            <div className="p26-top-right">
+              <div className="p26-fifa-badge">
+                <span style={{fontSize:"0.55rem", fontWeight:900, color:"white", letterSpacing:1}}>FIFA</span>
+                <span style={{fontSize:"0.7rem"}}>⚽</span>
               </div>
             </div>
 
-            {/* Club */}
-            <div className="pan-club">
-              {jugador.club ? `🏟️ ${jugador.club}` : `🏢 ${jugador.empresa}`}
+            {/* Logo LPS arriba izq (debajo del número) */}
+            <img src="/logo.png" alt="LPS" className="p26-lps-logo" crossOrigin="anonymous" />
+
+            {/* Foto jugador */}
+            <div className="p26-foto-wrap">
+              {tieneFoto
+                ? <img src={jugador.foto_url} alt={jugador.nombre} className="p26-foto" crossOrigin="anonymous" />
+                : <div className="p26-avatar" style={{background: paleta.dark, color: paleta.bg}}>
+                    {iniciales}
+                  </div>
+              }
             </div>
 
-            {/* Footer */}
-            <div className="pan-footer">
-              <span>PRODE MUNDIAL 2026</span>
-              <span>LPS SEGURIDAD</span>
+            {/* Gradiente inferior sobre la foto */}
+            <div className="p26-foto-grad" />
+
+            {/* Bandera abajo izq */}
+            <div className="p26-bandera">🇦🇷</div>
+          </div>
+
+          {/* ===== ZONA INFERIOR — DATOS ===== */}
+          <div className="p26-datos" style={{background: paleta.dark}}>
+            <div className="p26-nombre-wrap">
+              <div className="p26-apellido">{apellido}</div>
+              {primerNombre && <div className="p26-primernombre">{primerNombre}</div>}
+            </div>
+
+            <div className="p26-ficha">
+              {jugador.fecha_nac && <span>{jugador.fecha_nac}</span>}
+              {jugador.fecha_nac && jugador.estatura && <span className="p26-sep">·</span>}
+              {jugador.estatura && <span>{jugador.estatura}</span>}
+              {jugador.estatura && jugador.peso && <span className="p26-sep">·</span>}
+              {jugador.peso && <span>{jugador.peso}</span>}
+            </div>
+
+            <div className="p26-club-row">
+              <span className="p26-club-txt">
+                {jugador.club ? jugador.club.toUpperCase() : jugador.empresa.toUpperCase()}
+              </span>
+              <img src="/logo.png" alt="LPS" className="p26-panini-logo" crossOrigin="anonymous" />
             </div>
           </div>
         </div>
