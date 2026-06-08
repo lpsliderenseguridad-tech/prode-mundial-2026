@@ -868,3 +868,151 @@ body {
   width: 22px; height: 22px; object-fit: contain;
   border-radius: 50%; opacity: 0.9;
 }
+
+/* ===== PANINI 2026 V2 — FIEL AL ORIGINAL ===== */
+.p26v2-card {
+  width: 220px;
+  border-radius: 8px;
+  border: 2px solid rgba(255,255,255,0.6);
+  box-shadow: 0 0 0 3px var(--dark), 0 24px 60px rgba(0,0,0,0.8);
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+  display: flex; flex-direction: column;
+}
+
+/* Zona foto */
+.p26v2-top {
+  position: relative;
+  height: 270px;
+  background: var(--bg, #5BC4C0);
+  overflow: hidden;
+}
+.p26v2-bg {
+  position: absolute; inset: 0;
+  background: var(--bg, #5BC4C0);
+}
+
+/* "26" azul oscuro enorme — igual al original */
+.p26v2-26 {
+  position: absolute;
+  top: -15px; left: -15px;
+  font-size: 13rem;
+  font-weight: 900;
+  color: var(--num, #3A9E9A);
+  line-height: 1;
+  font-family: 'Arial Black', Impact, sans-serif;
+  letter-spacing: -12px;
+  user-select: none;
+  z-index: 1;
+  white-space: nowrap;
+}
+
+/* Foto encima */
+.p26v2-foto-container {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding-left: 8px;
+}
+.p26v2-foto {
+  height: 95%;
+  width: auto;
+  object-fit: cover;
+  object-position: top center;
+  max-width: 160px;
+}
+.p26v2-avatar {
+  width: 150px; height: 200px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 4rem; font-weight: 900;
+  color: var(--dark); background: rgba(255,255,255,0.2);
+  border-radius: 8px;
+}
+
+/* Columna derecha */
+.p26v2-right-col {
+  position: absolute;
+  right: 8px; top: 8px;
+  display: flex; flex-direction: column;
+  align-items: center; gap: 8px;
+  z-index: 3;
+}
+.p26v2-fifa {
+  display: flex; flex-direction: column; align-items: center;
+  background: rgba(255,255,255,0.95);
+  border-radius: 6px; padding: 4px 6px;
+}
+.p26v2-fifa-txt {
+  font-size: 0.5rem; font-weight: 900;
+  color: #1a237e; letter-spacing: 1px;
+}
+.p26v2-copa { font-size: 1.1rem; line-height: 1; }
+.p26v2-bandera-circle {
+  font-size: 1.6rem;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+/* Número figurita */
+.p26v2-numfig {
+  position: absolute; top: 8px; left: 10px;
+  font-size: 1rem; font-weight: 900;
+  color: white; z-index: 4;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+}
+
+/* Logo LPS */
+.p26v2-lps {
+  position: absolute; bottom: 8px; left: 8px;
+  width: 24px; height: 24px;
+  border-radius: 50%; border: 2px solid rgba(255,255,255,0.8);
+  z-index: 4; object-fit: cover;
+}
+
+/* Zona datos */
+.p26v2-bottom {
+  background: var(--bg, #5BC4C0);
+  padding: 6px 8px 7px;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.p26v2-nombre-pill {
+  background: var(--dark, #2D7A77);
+  border-radius: 20px; padding: 4px 12px;
+  text-align: center;
+}
+.p26v2-primer {
+  font-size: 0.7rem; color: rgba(255,255,255,0.8);
+  font-weight: 400;
+}
+.p26v2-apellido {
+  font-size: 0.85rem; color: white;
+  font-weight: 900; letter-spacing: 1px;
+}
+.p26v2-datos-pill {
+  background: var(--dark, #2D7A77);
+  border-radius: 20px; padding: 3px 12px;
+  text-align: center;
+  color: rgba(255,255,255,0.85);
+  font-size: 0.62rem;
+  display: flex; justify-content: center; gap: 5px;
+}
+.p26v2-dot { opacity: 0.5; }
+.p26v2-club-row {
+  display: flex; align-items: center; gap: 5px;
+}
+.p26v2-club-pill {
+  flex: 1;
+  background: var(--dark, #2D7A77);
+  border-radius: 20px; padding: 3px 10px;
+  font-size: 0.6rem; font-weight: 900;
+  color: white; letter-spacing: 1px;
+  text-align: center;
+}
+.p26v2-panini-badge {
+  width: 28px; height: 28px;
+  border-radius: 50%; object-fit: cover;
+  border: 2px solid rgba(255,255,255,0.7);
+  flex-shrink: 0;
+}

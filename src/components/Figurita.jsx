@@ -1,14 +1,14 @@
 import { useRef, useEffect, useState } from "react"
 
 const PALETAS = [
-  { bg: "#74C0FC", dark: "#1864AB", text: "#fff", num_color: "rgba(255,255,255,0.15)" },
-  { bg: "#F03E3E", dark: "#C92A2A", text: "#fff", num_color: "rgba(255,255,255,0.15)" },
-  { bg: "#2F9E44", dark: "#1B5E20", text: "#fff", num_color: "rgba(255,255,255,0.15)" },
-  { bg: "#F59F00", dark: "#8B5E00", text: "#fff", num_color: "rgba(255,255,255,0.15)" },
-  { bg: "#7950F2", dark: "#4C2FBF", text: "#fff", num_color: "rgba(255,255,255,0.15)" },
-  { bg: "#1098AD", dark: "#0A6070", text: "#fff", num_color: "rgba(255,255,255,0.15)" },
-  { bg: "#E8590C", dark: "#8B3000", text: "#fff", num_color: "rgba(255,255,255,0.15)" },
-  { bg: "#212529", dark: "#000", text: "#FFD700", num_color: "rgba(255,215,0,0.12)" },
+  { bg: "#5BC4C0", num: "#3A9E9A", dark: "#2D7A77", bandera: "🇦🇷" },
+  { bg: "#E85D5D", num: "#C23B3B", dark: "#9E2A2A", bandera: "🇪🇸" },
+  { bg: "#5BAD6F", num: "#3A8A50", dark: "#276638", bandera: "🇧🇷" },
+  { bg: "#E8A83A", num: "#C47F1A", dark: "#9E6010", bandera: "🇨🇴" },
+  { bg: "#7B68EE", num: "#5A4BC9", dark: "#3D30A8", bandera: "🇫🇷" },
+  { bg: "#5BA8C4", num: "#3A7EA0", dark: "#275E7A", bandera: "🇺🇾" },
+  { bg: "#E87A3A", num: "#C45A1A", dark: "#9E3E10", bandera: "🇲🇽" },
+  { bg: "#4A4A6A", num: "#2A2A4A", dark: "#1A1A3A", bandera: "🌍" },
 ]
 
 function getPaleta(empresa) {
@@ -30,8 +30,9 @@ export default function Figurita({ jugador, puntos, onCerrar }) {
   const numFig = getNum(jugador.nombre, jugador.empresa)
   const iniciales = jugador.nombre.split(" ").map(p => p[0]).join("").toUpperCase().slice(0,2)
   const tieneFoto = jugador.foto_url && jugador.foto_url.length > 0
-  const apellido = jugador.nombre.split(" ").slice(-1)[0]?.toUpperCase() || jugador.nombre.toUpperCase()
-  const primerNombre = jugador.nombre.split(" ").slice(0,-1).join(" ") || ""
+  const partes = jugador.nombre.trim().split(" ")
+  const apellido = partes.slice(-1)[0]?.toUpperCase() || ""
+  const primerNombre = partes.slice(0,-1).join(" ").toUpperCase() || ""
 
   useEffect(() => {
     if (!window.html2canvas) {
@@ -65,72 +66,67 @@ export default function Figurita({ jugador, puntos, onCerrar }) {
     <div className="figurita-overlay" onClick={onCerrar}>
       <div className="figurita-modal" onClick={e => e.stopPropagation()}>
 
-        <div className="p26-card" ref={ref} style={{
+        <div className="p26v2-card" ref={ref} style={{
           "--bg": paleta.bg,
+          "--num": paleta.num,
           "--dark": paleta.dark,
-          "--text": paleta.text,
-          "--numcol": paleta.num_color,
         }}>
-          {/* ===== ZONA SUPERIOR — FOTO ===== */}
-          <div className="p26-foto-zona">
+          {/* ===== ZONA FOTO ===== */}
+          <div className="p26v2-top">
 
-            {/* Fondo degradé */}
-            <div className="p26-fondo-grad" />
+            {/* Fondo sólido */}
+            <div className="p26v2-bg" />
 
-            {/* "26" gigante semitransparente */}
-            <div className="p26-big-num">26</div>
+            {/* "26" enorme azul oscuro — igual que Panini real */}
+            <div className="p26v2-26">26</div>
 
-            {/* Número de figurita — esquina sup izq */}
-            <div className="p26-fig-num">{numFig}</div>
-
-            {/* Logos arriba derecha */}
-            <div className="p26-top-right">
-              <div className="p26-fifa-badge">
-                <span style={{fontSize:"0.55rem", fontWeight:900, color:"white", letterSpacing:1}}>FIFA</span>
-                <span style={{fontSize:"0.7rem"}}>⚽</span>
-              </div>
-            </div>
-
-            {/* Logo LPS arriba izq (debajo del número) */}
-            <img src="/logo.png" alt="LPS" className="p26-lps-logo" crossOrigin="anonymous" />
-
-            {/* Foto jugador */}
-            <div className="p26-foto-wrap">
+            {/* Foto encima del 26 */}
+            <div className="p26v2-foto-container">
               {tieneFoto
-                ? <img src={jugador.foto_url} alt={jugador.nombre} className="p26-foto" crossOrigin="anonymous" />
-                : <div className="p26-avatar" style={{background: paleta.dark, color: paleta.bg}}>
-                    {iniciales}
-                  </div>
+                ? <img src={jugador.foto_url} alt={jugador.nombre} className="p26v2-foto" crossOrigin="anonymous" />
+                : <div className="p26v2-avatar">{iniciales}</div>
               }
             </div>
 
-            {/* Gradiente inferior sobre la foto */}
-            <div className="p26-foto-grad" />
+            {/* Columna derecha: FIFA + bandera */}
+            <div className="p26v2-right-col">
+              <div className="p26v2-fifa">
+                <span className="p26v2-fifa-txt">FIFA</span>
+                <span className="p26v2-copa">🏆</span>
+              </div>
+              <div className="p26v2-bandera-circle">{paleta.bandera}</div>
+            </div>
 
-            {/* Bandera abajo izq */}
-            <div className="p26-bandera">🇦🇷</div>
+            {/* Número figurita arriba izq */}
+            <div className="p26v2-numfig">{numFig}</div>
+
+            {/* Logo LPS */}
+            <img src="/logo.png" alt="LPS" className="p26v2-lps" crossOrigin="anonymous" />
+
           </div>
 
-          {/* ===== ZONA INFERIOR — DATOS ===== */}
-          <div className="p26-datos" style={{background: paleta.dark}}>
-            <div className="p26-nombre-wrap">
-              <div className="p26-apellido">{apellido}</div>
-              {primerNombre && <div className="p26-primernombre">{primerNombre}</div>}
+          {/* ===== ZONA DATOS ===== */}
+          <div className="p26v2-bottom">
+            {/* Píldora nombre */}
+            <div className="p26v2-nombre-pill">
+              <span className="p26v2-primer">{primerNombre} </span>
+              <span className="p26v2-apellido">{apellido}</span>
             </div>
 
-            <div className="p26-ficha">
+            {/* Datos */}
+            <div className="p26v2-datos-pill">
               {jugador.fecha_nac && <span>{jugador.fecha_nac}</span>}
-              {jugador.fecha_nac && jugador.estatura && <span className="p26-sep">·</span>}
-              {jugador.estatura && <span>{jugador.estatura}</span>}
-              {jugador.estatura && jugador.peso && <span className="p26-sep">·</span>}
-              {jugador.peso && <span>{jugador.peso}</span>}
+              {jugador.estatura && <><span className="p26v2-dot">|</span><span>{jugador.estatura}</span></>}
+              {jugador.peso && <><span className="p26v2-dot">|</span><span>{jugador.peso}</span></>}
+              {!jugador.fecha_nac && !jugador.estatura && <span>{puntos} pts</span>}
             </div>
 
-            <div className="p26-club-row">
-              <span className="p26-club-txt">
-                {jugador.club ? jugador.club.toUpperCase() : jugador.empresa.toUpperCase()}
-              </span>
-              <img src="/logo.png" alt="LPS" className="p26-panini-logo" crossOrigin="anonymous" />
+            {/* Club + logo */}
+            <div className="p26v2-club-row">
+              <div className="p26v2-club-pill">
+                {(jugador.club || jugador.empresa).toUpperCase()}
+              </div>
+              <img src="/logo.png" alt="LPS" className="p26v2-panini-badge" crossOrigin="anonymous" />
             </div>
           </div>
         </div>
